@@ -27,10 +27,15 @@ def createTitleInterface():
     title_label = makeLabel(title_frame, "Message Encrypter", 14).place(x=170, y=2)
 
 
+def createInputInterface():
+    input_frame = makeFrame(root).place(relwidth=1, relheight=0.4, relx=0, rely=0.062)
+    messg_label = makeLabel(input_frame, "Enter Message:", 12).place(x=10, y=35)
+    messg_entry = tk.Text(input_frame, width=60, height=10, bg=COL_THIRD, fg=COL_TEXT).place(x=10, y=60)
 
 
 def createInterface():
     createTitleInterface()
+    createInputInterface()
 
 
 
