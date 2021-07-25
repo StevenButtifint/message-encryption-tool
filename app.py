@@ -14,13 +14,39 @@ COL_SECND   = "cyan2"
 COL_THIRD   = "DarkSlateGray3"
 COL_TEXT    = "white"
 
-ENC_TYPES   = ["option1", "option2", "option3"]
+ENC_TYPES   = ["AES", "option2", "option3"]
 
 
+def encryptAES(message):
+    key = Fernet.generate_key()
+    f = Fernet(key)
+    msg_encoded = message.encode()
+    msg_encrypt = f.encrypt(msg_encoded)
+    return msg_encrypt, key
+
+
+def decryptAES(msg_encrypted, key):
+    f = Fernet(key)
+    msg_encoded = f.decrypt(msg_encrypted)
+    msg_origin = msg_encoded.decode()
+    return msg_origin
+    
 def encryptMessage(message, title, enc_type):
     print("message:", message)
     print("title:", title)
     print("enc_type:", enc_type)
+
+    enc_functions = [encryptAES, "", ""]
+
+    
+    enc_func = enc_functions[ENC_TYPES.index(enc_type)]
+
+    enc_message, key = enc_func(message)
+
+    print(enc_message)
+    print(key)
+
+    print(decryptAES(enc_message, key))
 
 
 def makeFrame(root):
@@ -58,6 +84,7 @@ def createInterface():
     proce_btn = tk.Button(proce_frm, text="PROCESS", width=10, bg=COL_THIRD, fg=COL_TEXT,
                           command= lambda: encryptMessage(messg_ent.get("1.0","end"), title_ent.get(), options.get()))
     proce_btn.place(x=200, y=350)
+    #need unwritable textbox for key output
 
     
 if __name__ == "__main__":
