@@ -3,6 +3,7 @@ from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, St
 
 from cryptography.fernet import Fernet
 
+
 APP_TITLE   = "Message Encryption Tool"
 APP_ICON    = "icon.ico"
 
@@ -17,6 +18,7 @@ COL_TEXT    = "white"
 ENC_TYPES   = ["AES", "option2", "option3"]
 ENC_OPTNS   = ["Encrypt", "Decrypt"]
 
+
 def encryptAES(message):
     key = Fernet.generate_key()
     f = Fernet(key)
@@ -30,8 +32,13 @@ def decryptAES(msg_encrypted, key):
     msg_encoded = f.decrypt(msg_encrypted)
     msg_origin = msg_encoded.decode()
     return msg_origin
-    
-def encryptMessage(message, title, enc_type):
+
+
+def encryptMessage(message, title, enc_type, outpt_txt):
+    outpt_txt.configure(state=tk.NORMAL)
+    outpt_txt.delete('1.0', tk.END)
+    outpt_txt.insert("1.0", enc_type)
+    outpt_txt.configure(state=tk.DISABLED)
     print("message:", message)
     print("title:", title)
     print("enc_type:", enc_type)
@@ -58,7 +65,7 @@ def makeLabel(frame, text, font_size):
     return tk.Label(frame, text=text, bg=COL_PRIME, fg=COL_SECND, font=(COL_SECND,font_size))
     
 
-def makeCustomInput(operation):
+def makeCustomInput(operation, options, messg_ent, outpt_txt):
     global title_lbl, title_ent, temp_frm
 
     try:
@@ -78,6 +85,9 @@ def makeCustomInput(operation):
         title_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
         title_ent.place(x=90, y=280)
         print("Decrypt")
+    proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
+                          command= lambda: encryptMessage(messg_ent.get("1.0","end"), title_ent.get(), options.get(), outpt_txt))
+    proce_btn.place(x=380, y=280)
 
     
 def createInterface():
@@ -102,18 +112,15 @@ def createInterface():
     options = StringVar(opton_frm)
     options.set("> Select <") #default value
     dropD_opM = OptionMenu(opton_frm, options, *ENC_OPTNS,
-                          command= lambda x=None: makeCustomInput(options.get()))
+                          command= lambda x=None: makeCustomInput(options.get(), options, messg_ent, outpt_txt))
     dropD_opM.config(width=11, bg=COL_THIRD, fg=COL_TEXT)
     dropD_opM.place(x=380, y=240)
     #
-
-
-
-    proce_frm = makeFrame(root).place(relwidth=1, relheight=0.15, relx=0, rely=0.616)
-    proce_btn = tk.Button(proce_frm, text="PROCESS", width=10, bg=COL_THIRD, fg=COL_TEXT,
-                          command= lambda: encryptMessage(messg_ent.get("1.0","end"), title_ent.get(), options.get()))
-    proce_btn.place(x=200, y=350)
-    #need unwritable textbox for key output
+    outpt_frm = makeFrame(root).place(relwidth=1, relheight=0.4, relx=0, rely=0.616)
+    outpt_lbl = makeLabel(outpt_frm, "OUTPUT", 12).place(x=230, y=310)
+    outpt_txt = tk.Text(outpt_frm, width=60, height=10, bg=COL_THIRD, fg=COL_TEXT)
+    outpt_txt.configure(state=tk.DISABLED)
+    outpt_txt.place(x=10, y=330)
 
     
 if __name__ == "__main__":
