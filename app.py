@@ -15,7 +15,7 @@ COL_THIRD   = "DarkSlateGray3"
 COL_TEXT    = "white"
 
 ENC_TYPES   = ["AES", "option2", "option3"]
-
+ENC_OPTNS   = ["Encrypt", "Decrypt"]
 
 def encryptAES(message):
     key = Fernet.generate_key()
@@ -58,6 +58,28 @@ def makeLabel(frame, text, font_size):
     return tk.Label(frame, text=text, bg=COL_PRIME, fg=COL_SECND, font=(COL_SECND,font_size))
     
 
+def makeCustomInput(operation):
+    global title_lbl, title_ent, temp_frm
+
+    try:
+        temp_frm.destroy()
+    except:
+        pass
+    
+    temp_frm = makeFrame(root).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
+
+    if (operation == "Encrypt"):
+        title_lbl = makeLabel(temp_frm, "Output Title Name:", 12).place(x=10, y=278)
+        title_ent = tk.Entry(temp_frm, width=25, bg=COL_THIRD, fg=COL_TEXT)
+        title_ent.place(x=150, y=280)
+        print("Encrypt")
+    else:
+        title_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
+        title_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
+        title_ent.place(x=90, y=280)
+        print("Decrypt")
+
+    
 def createInterface():
     title_frm = makeFrame(root).place(relwidth=1, relheight=0.06, relx=0, rely=0)
     title_lbl = makeLabel(title_frm, "Message Encrypter", 14).place(x=170, y=2)
@@ -76,9 +98,16 @@ def createInterface():
     dropD_opM.config(width=18, bg=COL_THIRD, fg=COL_TEXT)
     dropD_opM.place(x=150, y=240)
     #
-    title_lbl = makeLabel(opton_frm, "Output Title Name:", 12).place(x=10, y=278)
-    title_ent = tk.Entry(opton_frm, width=25, bg=COL_THIRD, fg=COL_TEXT)
-    title_ent.place(x=150, y=280)
+    type_lbl = makeLabel(opton_frm, "Type:", 12).place(x=320, y=243)
+    options = StringVar(opton_frm)
+    options.set("> Select <") #default value
+    dropD_opM = OptionMenu(opton_frm, options, *ENC_OPTNS,
+                          command= lambda x=None: makeCustomInput(options.get()))
+    dropD_opM.config(width=11, bg=COL_THIRD, fg=COL_TEXT)
+    dropD_opM.place(x=380, y=240)
+    #
+
+
 
     proce_frm = makeFrame(root).place(relwidth=1, relheight=0.15, relx=0, rely=0.616)
     proce_btn = tk.Button(proce_frm, text="PROCESS", width=10, bg=COL_THIRD, fg=COL_TEXT,
