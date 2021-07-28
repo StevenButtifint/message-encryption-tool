@@ -34,26 +34,58 @@ def decryptAES(msg_encrypted, key):
     return msg_origin
 
 
-def encryptMessage(message, title, enc_type, outpt_txt):
+def processMessage(message, title, enc_type, enc_option, outpt_txt):
+
+    output = ""
+    
+    print("message:",message)
+    print("title/key:", title)
+    print("enc_type:", enc_type)
+    print("output option", enc_option)
+    if enc_type == ENC_OPTNS[0]:
+
+        if enc_option == ENC_TYPES[0]:
+            print("Encrypting with",ENC_TYPES[0])
+            #create general encryption and decryption funcs
+
+            message_encrypted, key = encryptAES(message)
+            output = "Key:\n" + str(key) +"\n\n" + "Message:\n" + str(message_encrypted)
+
+
+        elif enc_option == ENC_TYPES[1]:
+            print("Encrypting with",ENC_TYPES[1])
+
+        elif enc_option == ENC_TYPES[2]:
+            print("Encrypting with",ENC_TYPES[2])
+
+
+    else:
+
+        if enc_option == ENC_TYPES[0]:
+            print("Decrypting with",ENC_TYPES[0])
+
+        elif enc_option == ENC_TYPES[1]:
+            print("Decrypting with",ENC_TYPES[1])
+
+        elif enc_option == ENC_TYPES[2]:
+            print("Decrypting with",ENC_TYPES[2])
+    
     outpt_txt.configure(state=tk.NORMAL)
     outpt_txt.delete('1.0', tk.END)
-    outpt_txt.insert("1.0", enc_type)
+    outpt_txt.insert("1.0", output)
     outpt_txt.configure(state=tk.DISABLED)
-    print("message:", message)
-    print("title:", title)
-    print("enc_type:", enc_type)
 
-    enc_functions = [encryptAES, "", ""]
+   # enc_functions = [encryptAES, "", ""]
 
     
-    enc_func = enc_functions[ENC_TYPES.index(enc_type)]
+   # enc_func = enc_functions[ENC_TYPES.index(enc_type)]
 
-    enc_message, key = enc_func(message)
+   # enc_message, key = enc_func(message)
 
-    print(enc_message)
-    print(key)
+   # print(enc_message)
+   # print(key)
 
-    print(decryptAES(enc_message, key))
+   # print(decryptAES(enc_message, key))
 
 
 def makeFrame(root):
@@ -65,7 +97,7 @@ def makeLabel(frame, text, font_size):
     return tk.Label(frame, text=text, bg=COL_PRIME, fg=COL_SECND, font=(COL_SECND,font_size))
     
 
-def makeCustomInput(operation, options, messg_ent, outpt_txt):
+def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     global title_lbl, title_ent, temp_frm
 
     try:
@@ -86,7 +118,7 @@ def makeCustomInput(operation, options, messg_ent, outpt_txt):
         title_ent.place(x=90, y=280)
         print("Decrypt")
     proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
-                          command= lambda: encryptMessage(messg_ent.get("1.0","end"), title_ent.get(), options.get(), outpt_txt))
+                          command= lambda: processMessage(messg_ent.get("1.0","end"), title_ent.get(), operation.get(), enc_option.get(), outpt_txt))
     proce_btn.place(x=380, y=280)
 
     
@@ -102,17 +134,17 @@ def createInterface():
     opton_frm = makeFrame(root).place(relwidth=1, relheight=0.15, relx=0, rely=0.464)
     #
     encry_lbl = makeLabel(opton_frm, "Encryption Method:", 12).place(x=10, y=243)
-    options = StringVar(opton_frm)
-    options.set(ENC_TYPES[0]) #default value
-    dropD_opM = OptionMenu(opton_frm, options, *ENC_TYPES)
+    enc_methods = StringVar(opton_frm)
+    enc_methods.set(ENC_TYPES[0]) #default value
+    dropD_opM = OptionMenu(opton_frm, enc_methods, *ENC_TYPES)
     dropD_opM.config(width=18, bg=COL_THIRD, fg=COL_TEXT)
     dropD_opM.place(x=150, y=240)
     #
     type_lbl = makeLabel(opton_frm, "Type:", 12).place(x=320, y=243)
-    options = StringVar(opton_frm)
-    options.set("> Select <") #default value
-    dropD_opM = OptionMenu(opton_frm, options, *ENC_OPTNS,
-                          command= lambda x=None: makeCustomInput(options.get(), options, messg_ent, outpt_txt))
+    operation_type = StringVar(opton_frm)
+    operation_type.set("> Select <") #default value
+    dropD_opM = OptionMenu(opton_frm, operation_type, *ENC_OPTNS,
+                          command= lambda x=None: makeCustomInput(operation_type, messg_ent, enc_methods, outpt_txt))
     dropD_opM.config(width=11, bg=COL_THIRD, fg=COL_TEXT)
     dropD_opM.place(x=380, y=240)
     #
