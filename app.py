@@ -16,7 +16,7 @@ COL_THIRD   = "DarkSlateGray3"
 COL_TEXT    = "white"
 
 ENC_TYPES   = ["AES", "option2", "option3"]
-ENC_OPTNS   = ["Encrypt", "Decrypt"]
+CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
 def encryptAES(message):
@@ -34,23 +34,28 @@ def decryptAES(msg_encrypted, key):
     return msg_origin
 
 
-def processMessage(message, title, enc_type, enc_option, outpt_txt):
+def formatEncOutput(ciphertext, key):
+    return "Key:\n" + str(key) +"\n\n" + "Message:\n" + str(ciphertext)
+    
+
+def processMessage(message, title, crypto_type, enc_option, outpt_txt):
 
     output = ""
     
     print("message:",message)
     print("title/key:", title)
-    print("enc_type:", enc_type)
+    print("enc_type:", crypto_type)
     print("output option", enc_option)
-    if enc_type == ENC_OPTNS[0]:
+    
+    if crypto_type == CRYPTO_TYPE[0]:
 
         if enc_option == ENC_TYPES[0]:
             print("Encrypting with",ENC_TYPES[0])
             #create general encryption and decryption funcs
 
-            message_encrypted, key = encryptAES(message)
-            output = "Key:\n" + str(key) +"\n\n" + "Message:\n" + str(message_encrypted)
-
+            ciphertext, key = encryptAES(message)
+            
+            output = formatEncOutput(ciphertext, key)
 
         elif enc_option == ENC_TYPES[1]:
             print("Encrypting with",ENC_TYPES[1])
@@ -74,16 +79,10 @@ def processMessage(message, title, enc_type, enc_option, outpt_txt):
     outpt_txt.delete('1.0', tk.END)
     outpt_txt.insert("1.0", output)
     outpt_txt.configure(state=tk.DISABLED)
-
-   # enc_functions = [encryptAES, "", ""]
-
     
    # enc_func = enc_functions[ENC_TYPES.index(enc_type)]
 
    # enc_message, key = enc_func(message)
-
-   # print(enc_message)
-   # print(key)
 
    # print(decryptAES(enc_message, key))
 
@@ -107,16 +106,10 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     
     temp_frm = makeFrame(root).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
 
-    if (operation == "Encrypt"):
-        title_lbl = makeLabel(temp_frm, "Output Title Name:", 12).place(x=10, y=278)
-        title_ent = tk.Entry(temp_frm, width=25, bg=COL_THIRD, fg=COL_TEXT)
-        title_ent.place(x=150, y=280)
-        print("Encrypt")
-    else:
+    if (operation.get() == CRYPTO_TYPE[1]):
         title_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
         title_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
         title_ent.place(x=90, y=280)
-        print("Decrypt")
     proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
                           command= lambda: processMessage(messg_ent.get("1.0","end"), title_ent.get(), operation.get(), enc_option.get(), outpt_txt))
     proce_btn.place(x=380, y=280)
@@ -143,7 +136,7 @@ def createInterface():
     type_lbl = makeLabel(opton_frm, "Type:", 12).place(x=320, y=243)
     operation_type = StringVar(opton_frm)
     operation_type.set("> Select <") #default value
-    dropD_opM = OptionMenu(opton_frm, operation_type, *ENC_OPTNS,
+    dropD_opM = OptionMenu(opton_frm, operation_type, *CRYPTO_TYPE,
                           command= lambda x=None: makeCustomInput(operation_type, messg_ent, enc_methods, outpt_txt))
     dropD_opM.config(width=11, bg=COL_THIRD, fg=COL_TEXT)
     dropD_opM.place(x=380, y=240)
