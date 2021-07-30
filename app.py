@@ -19,55 +19,48 @@ ENC_TYPES   = ["AES", "option2", "option3"]
 CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
-def encryptAES(message):
+def encryptAES(plaintext):
     key = Fernet.generate_key()
     f = Fernet(key)
-    msg_encoded = message.encode()
+    msg_encoded = plaintext.encode()
     msg_encrypt = f.encrypt(msg_encoded)
     return msg_encrypt, key
 
 
-def decryptAES(msg_encrypted, key):
+def decryptAES(ciphertext, key):
     f = Fernet(key)
-    msg_encoded = f.decrypt(msg_encrypted)
-    msg_origin = msg_encoded.decode()
-    return msg_origin
+    msg_encoded = f.decrypt(ciphertext)
+    plaintext = msg_encoded.decode()
+    return plaintext
 
 
 def formatEncOutput(ciphertext, key):
-    return "Key:\n" + str(key) +"\n\n" + "Message:\n" + str(ciphertext)
+    return "Key:\n" + str(key)[2:-1] +"\n\n" + "Message:\n" + str(ciphertext)[2:-1]
     
 
-def processMessage(message, title, crypto_type, enc_option, outpt_txt):
+def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
     output = ""
-    
-    print("message:",message)
-    print("title/key:", title)
-    print("enc_type:", crypto_type)
-    print("output option", enc_option)
-    
+        
     if crypto_type == CRYPTO_TYPE[0]:
 
         if enc_option == ENC_TYPES[0]:
             print("Encrypting with",ENC_TYPES[0])
-            #create general encryption and decryption funcs
-
             ciphertext, key = encryptAES(message)
-            
             output = formatEncOutput(ciphertext, key)
-
+            
         elif enc_option == ENC_TYPES[1]:
             print("Encrypting with",ENC_TYPES[1])
 
         elif enc_option == ENC_TYPES[2]:
             print("Encrypting with",ENC_TYPES[2])
 
-
     else:
 
         if enc_option == ENC_TYPES[0]:
             print("Decrypting with",ENC_TYPES[0])
+            plaintext = decryptAES(bytes(message, encoding='utf-8'), bytes(key, encoding='utf-8'))
+            output = "Message:\n" + str(plaintext)
 
         elif enc_option == ENC_TYPES[1]:
             print("Decrypting with",ENC_TYPES[1])
@@ -80,12 +73,6 @@ def processMessage(message, title, crypto_type, enc_option, outpt_txt):
     outpt_txt.insert("1.0", output)
     outpt_txt.configure(state=tk.DISABLED)
     
-   # enc_func = enc_functions[ENC_TYPES.index(enc_type)]
-
-   # enc_message, key = enc_func(message)
-
-   # print(decryptAES(enc_message, key))
-
 
 def makeFrame(root):
     frame = tk.Frame(root, bg=COL_PRIME)
@@ -97,7 +84,7 @@ def makeLabel(frame, text, font_size):
     
 
 def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
-    global title_lbl, title_ent, temp_frm
+    global key_lbl, key_ent, temp_frm
 
     try:
         temp_frm.destroy()
@@ -107,11 +94,15 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     temp_frm = makeFrame(root).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
 
     if (operation.get() == CRYPTO_TYPE[1]):
-        title_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
-        title_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
-        title_ent.place(x=90, y=280)
+        key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
+        key_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
+        key_ent.place(x=90, y=280)
+
+    else:
+        key_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
+
     proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
-                          command= lambda: processMessage(messg_ent.get("1.0","end"), title_ent.get(), operation.get(), enc_option.get(), outpt_txt))
+                          command= lambda: processMessage(messg_ent.get("1.0","end"), key_ent.get(), operation.get(), enc_option.get(), outpt_txt))
     proce_btn.place(x=380, y=280)
 
     
