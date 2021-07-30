@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, StringVar
 
+#aes 256
 from cryptography.fernet import Fernet
-
+#rsa
+import rsa
 
 APP_TITLE   = "Message Encryption Tool"
 APP_ICON    = "icon.ico"
@@ -15,7 +17,7 @@ COL_SECND   = "cyan2"
 COL_THIRD   = "DarkSlateGray3"
 COL_TEXT    = "white"
 
-ENC_TYPES   = ["AES", "option2", "option3"]
+ENC_TYPES   = ["AES-128 Symmetric-Key", "RSA Asymmetric-Key", "option3"]
 CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
@@ -34,8 +36,26 @@ def decryptAES(ciphertext, key):
     return plaintext
 
 
+def encryptRSA(plaintext, publicKey):
+    if publicKey == "":
+        publicKey, privateKey = rsa.newkeys(512)
+    ciphertext = rsa.encrypt(plaintext.encode(), publicKey)
+    return ciphertext, publicKey, privateKey
+
+
+def decryptRSA(ciphertext, privateKey):
+    return rsa.decrypt(encMessage, privateKey).decode()
+
+
 def formatEncOutput(ciphertext, key):
     return "Key:\n" + str(key)[2:-1] +"\n\n" + "Message:\n" + str(ciphertext)[2:-1]
+    
+
+def setOutputText(outpt_txt, content):
+    outpt_txt.configure(state=tk.NORMAL)
+    outpt_txt.delete('1.0', tk.END)
+    outpt_txt.insert("1.0", content)
+    outpt_txt.configure(state=tk.DISABLED)
     
 
 def processMessage(message, key, crypto_type, enc_option, outpt_txt):
@@ -67,11 +87,8 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
         elif enc_option == ENC_TYPES[2]:
             print("Decrypting with",ENC_TYPES[2])
-    
-    outpt_txt.configure(state=tk.NORMAL)
-    outpt_txt.delete('1.0', tk.END)
-    outpt_txt.insert("1.0", output)
-    outpt_txt.configure(state=tk.DISABLED)
+
+    setOutputText(outpt_txt, output)
     
 
 def makeFrame(root):
@@ -121,10 +138,10 @@ def createInterface():
     enc_methods = StringVar(opton_frm)
     enc_methods.set(ENC_TYPES[0]) #default value
     dropD_opM = OptionMenu(opton_frm, enc_methods, *ENC_TYPES)
-    dropD_opM.config(width=18, bg=COL_THIRD, fg=COL_TEXT)
+    dropD_opM.config(width=21, bg=COL_THIRD, fg=COL_TEXT)
     dropD_opM.place(x=150, y=240)
     #
-    type_lbl = makeLabel(opton_frm, "Type:", 12).place(x=320, y=243)
+    type_lbl = makeLabel(opton_frm, "Type:", 12).place(x=330, y=243)
     operation_type = StringVar(opton_frm)
     operation_type.set("> Select <") #default value
     dropD_opM = OptionMenu(opton_frm, operation_type, *CRYPTO_TYPE,
