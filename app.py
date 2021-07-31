@@ -21,8 +21,10 @@ ENC_TYPES   = ["AES-128 Symmetric-Key", "RSA Asymmetric-Key", "option3"]
 CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
-def encryptAES(plaintext):
-    key = Fernet.generate_key()
+def encryptAES(plaintext, key):
+    print("key:", key)
+    if str(key) == "b''":
+        key = Fernet.generate_key()
     f = Fernet(key)
     msg_encoded = plaintext.encode()
     msg_encrypt = f.encrypt(msg_encoded)
@@ -66,7 +68,7 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
         if enc_option == ENC_TYPES[0]:
             print("Encrypting with",ENC_TYPES[0])
-            ciphertext, key = encryptAES(message)
+            ciphertext, key = encryptAES(message, bytes(key, encoding='utf-8'))
             output = formatEncOutput(ciphertext, key)
             
         elif enc_option == ENC_TYPES[1]:
@@ -110,13 +112,27 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     
     temp_frm = makeFrame(root).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
 
-    if (operation.get() == CRYPTO_TYPE[1]):
-        key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
-        key_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
-        key_ent.place(x=90, y=280)
+    if enc_option.get() == ENC_TYPES[0]:#aes
+        if (operation.get() == CRYPTO_TYPE[1]):
+            key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
+            key_ent = tk.Entry(temp_frm, width=37, bg=COL_THIRD, fg=COL_TEXT)
+            key_ent.place(x=90, y=280)
+        else:
+            key_lbl = makeLabel(temp_frm, "Reuse previous key:", 12).place(x=10, y=278)
+            key_ent = tk.Entry(temp_frm, width=26, bg=COL_THIRD, fg=COL_TEXT)
+            key_ent.place(x=160, y=280)
+            
+    if enc_option.get() == ENC_TYPES[1]:#rsa
+        if (operation.get() == CRYPTO_TYPE[1]):
+            key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
+            key_ent = tk.Entry(temp_frm, width=37, bg=COL_THIRD, fg=COL_TEXT)
+            key_ent.place(x=90, y=280)
+        else:
+            key_lbl = makeLabel(temp_frm, "Reuse previous key:", 12).place(x=10, y=278)
+            key_ent = tk.Entry(temp_frm, width=26, bg=COL_THIRD, fg=COL_TEXT)
+            key_ent.place(x=160, y=280)
+        
 
-    else:
-        key_ent = tk.Entry(temp_frm, width=35, bg=COL_THIRD, fg=COL_TEXT)
 
     proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
                           command= lambda: processMessage(messg_ent.get("1.0","end"), key_ent.get(), operation.get(), enc_option.get(), outpt_txt))
