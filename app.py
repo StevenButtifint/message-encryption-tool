@@ -3,8 +3,11 @@ from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, St
 
 #aes 256
 from cryptography.fernet import Fernet
+from methods import AES_256_custom_key
+
 #rsa
 import rsa
+
 
 APP_TITLE   = "Message Encryption Tool"
 APP_ICON    = "icon.ico"
@@ -39,14 +42,17 @@ def decryptAES(ciphertext, key):
 
 
 def encryptRSA(plaintext, publicKey):
-    if publicKey == "":
+    print("publickey:", publicKey)
+    if str(publicKey) == "":
         publicKey, privateKey = rsa.newkeys(512)
     ciphertext = rsa.encrypt(plaintext.encode(), publicKey)
+    print(type(publicKey))
+    print(publicKey.exportKey("PEM"))
     return ciphertext, publicKey, privateKey
 
 
 def decryptRSA(ciphertext, privateKey):
-    return rsa.decrypt(encMessage, privateKey).decode()
+    return rsa.decrypt(ciphertext, privateKey).decode()
 
 
 def formatEncOutput(ciphertext, key):
@@ -70,9 +76,13 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
             print("Encrypting with",ENC_TYPES[0])
             ciphertext, key = encryptAES(message, bytes(key, encoding='utf-8'))
             output = formatEncOutput(ciphertext, key)
-            
+
         elif enc_option == ENC_TYPES[1]:
             print("Encrypting with",ENC_TYPES[1])
+            ciphertext, publicKey, privateKey = encryptRSA(message, key)
+            plaintext = decryptRSA(ciphertext, privateKey)
+
+            output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext) + "dectypted again:\n" + plaintext
 
         elif enc_option == ENC_TYPES[2]:
             print("Encrypting with",ENC_TYPES[2])
@@ -86,6 +96,8 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
         elif enc_option == ENC_TYPES[1]:
             print("Decrypting with",ENC_TYPES[1])
+            plaintext = decryptRSA(message, key)
+            output = "Message:\n" + str(plaintext)
 
         elif enc_option == ENC_TYPES[2]:
             print("Decrypting with",ENC_TYPES[2])
