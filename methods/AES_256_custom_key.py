@@ -16,6 +16,11 @@ class AES256custom(object):
         ciphertext = AES.new(self.key, AES.MODE_CBC, iv)
         return self._encodeBase64(iv + ciphertext.encrypt(plaintext.encode()))
 
+    def decrypt(self, ciphertext):
+        ciphertext = self._decodeBase64(ciphertext)
+        iv = ciphertext[:AES.block_size]
+        cipher = AES.new(self.key, AES.MODE_CBC, iv)
+        return self._unpad(cipher.decrypt(ciphertext[AES.block_size:])).decode('utf-8')
 
     def _encodeBase64(self, data):
         return base64.b64encode(data)
