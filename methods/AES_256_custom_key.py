@@ -14,7 +14,11 @@ class AES256custom(object):
         iv = Random.new().read(AES.block_size)
         plaintext = self._pad(plaintext)
         ciphertext = AES.new(self.key, AES.MODE_CBC, iv)
-        return base64.b64encode(iv + ciphertext.encrypt(plaintext.encode()))
+        return self._encodeBase64(iv + ciphertext.encrypt(plaintext.encode()))
 
 
+    def _encodeBase64(self, data):
+        return base64.b64encode(data)
 
+    def _decodeBase64(self, data):
+        return base64.b64decode(data)
