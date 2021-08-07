@@ -32,3 +32,7 @@ class AES256custom(object):
     def _pad(self, p):
         return p + (self.block_size - len(p) % self.block_size) * chr(self.block_size - len(p) % self.block_size)
 
+    #Static Methods not using class instance
+    @staticmethod
+    def _unpad(p):
+        return p[:-ord(p[len(p)-1:])]
