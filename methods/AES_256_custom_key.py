@@ -22,8 +22,13 @@ class AES256custom(object):
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
         return self._unpad(cipher.decrypt(ciphertext[AES.block_size:])).decode('utf-8')
 
+    #Internal class functions
     def _encodeBase64(self, data):
         return base64.b64encode(data)
 
     def _decodeBase64(self, data):
         return base64.b64decode(data)
+
+    def _pad(self, p):
+        return p + (self.block_size - len(p) % self.block_size) * chr(self.block_size - len(p) % self.block_size)
+
