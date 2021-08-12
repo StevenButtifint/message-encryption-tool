@@ -136,8 +136,18 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
             key_lbl = makeLabel(temp_frm, "Reuse previous key:", 12).place(x=10, y=278)
             key_ent = tk.Entry(temp_frm, width=26, bg=COL_THIRD, fg=COL_TEXT)
             key_ent.place(x=160, y=280)
+
+    if enc_option.get() == ENC_TYPES[1]:#aes custom key
+        if (operation.get() == CRYPTO_TYPE[1]):
+            key_lbl = makeLabel(temp_frm, "Enter Custom Key String:", 12).place(x=10, y=278)
+            key_ent = tk.Entry(temp_frm, width=21, bg=COL_THIRD, fg=COL_TEXT)
+            key_ent.place(x=190, y=280)
+        else:
+            key_lbl = makeLabel(temp_frm, "Enter Custom Key String:", 12).place(x=10, y=278)
+            key_ent = tk.Entry(temp_frm, width=21, bg=COL_THIRD, fg=COL_TEXT)
+            key_ent.place(x=190, y=280)
             
-    if enc_option.get() == ENC_TYPES[1]:#rsa
+    if enc_option.get() == ENC_TYPES[2]:#rsa
         if (operation.get() == CRYPTO_TYPE[1]):
             key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
             key_ent = tk.Entry(temp_frm, width=37, bg=COL_THIRD, fg=COL_TEXT)
