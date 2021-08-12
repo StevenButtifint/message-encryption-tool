@@ -3,7 +3,7 @@ from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, St
 
 #aes 256
 from cryptography.fernet import Fernet
-from methods import AES_256_custom_key
+from methods.AES_256_custom_key import AES_256_custom_key
 
 #rsa
 import rsa
@@ -20,7 +20,7 @@ COL_SECND   = "cyan2"
 COL_THIRD   = "DarkSlateGray3"
 COL_TEXT    = "white"
 
-ENC_TYPES   = ["AES-128 Symmetric-Key", "RSA Asymmetric-Key", "option3"]
+ENC_TYPES   = ["AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA Asymmetric-Key"]
 CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
@@ -69,6 +69,20 @@ def setOutputText(outpt_txt, content):
 def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
     output = ""
+    print(crypto_type + "ing with " + enc_option)
+
+    if enc_option == ENC_TYPES[1]:
+        method = AES_256_custom_key(key)
+        if crypto_type == CRYPTO_TYPE[0]:
+            
+            ciphertext = method.encrypt(message)
+            output = ciphertext
+        else:
+            
+            plaintext = method.decrypt(message)
+            output = plaintext
+
+        
         
     if crypto_type == CRYPTO_TYPE[0]:
 
@@ -79,13 +93,15 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
         elif enc_option == ENC_TYPES[1]:
             print("Encrypting with",ENC_TYPES[1])
+            
+
+        elif enc_option == ENC_TYPES[2]:
+            print("Encrypting with",ENC_TYPES[2])
             ciphertext, publicKey, privateKey = encryptRSA(message, key)
             plaintext = decryptRSA(ciphertext, privateKey)
 
             output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext) + "dectypted again:\n" + plaintext
 
-        elif enc_option == ENC_TYPES[2]:
-            print("Encrypting with",ENC_TYPES[2])
 
     else:
 
@@ -96,11 +112,12 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
         elif enc_option == ENC_TYPES[1]:
             print("Decrypting with",ENC_TYPES[1])
-            plaintext = decryptRSA(message, key)
-            output = "Message:\n" + str(plaintext)
+
 
         elif enc_option == ENC_TYPES[2]:
             print("Decrypting with",ENC_TYPES[2])
+            plaintext = decryptRSA(message, key)
+            output = "Message:\n" + str(plaintext)
 
     setOutputText(outpt_txt, output)
     

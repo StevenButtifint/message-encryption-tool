@@ -4,7 +4,7 @@ from Crypto import Random
 from Crypto.Cipher import AES
 
 
-class AES256custom(object):
+class AES_256_custom_key(object):
 
     def __init__(self, key): 
         self.key = hashlib.sha256(key.encode()).digest()
