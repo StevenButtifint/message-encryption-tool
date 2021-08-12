@@ -83,39 +83,25 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
             output = plaintext
 
         
-        
     if crypto_type == CRYPTO_TYPE[0]:
 
         if enc_option == ENC_TYPES[0]:
-            print("Encrypting with",ENC_TYPES[0])
             ciphertext, key = encryptAES(message, bytes(key, encoding='utf-8'))
             output = formatEncOutput(ciphertext, key)
 
-        elif enc_option == ENC_TYPES[1]:
-            print("Encrypting with",ENC_TYPES[1])
-            
-
         elif enc_option == ENC_TYPES[2]:
-            print("Encrypting with",ENC_TYPES[2])
             ciphertext, publicKey, privateKey = encryptRSA(message, key)
             plaintext = decryptRSA(ciphertext, privateKey)
 
             output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext) + "dectypted again:\n" + plaintext
 
-
     else:
 
         if enc_option == ENC_TYPES[0]:
-            print("Decrypting with",ENC_TYPES[0])
             plaintext = decryptAES(bytes(message, encoding='utf-8'), bytes(key, encoding='utf-8'))
             output = "Message:\n" + str(plaintext)
 
-        elif enc_option == ENC_TYPES[1]:
-            print("Decrypting with",ENC_TYPES[1])
-
-
         elif enc_option == ENC_TYPES[2]:
-            print("Decrypting with",ENC_TYPES[2])
             plaintext = decryptRSA(message, key)
             output = "Message:\n" + str(plaintext)
 
