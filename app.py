@@ -3,6 +3,8 @@ from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, St
 
 #aes 256
 from cryptography.fernet import Fernet
+
+from methods.AES_128_symmetric_key import AES_128_symmetric_key
 from methods.AES_256_custom_key import AES_256_custom_key
 
 #rsa
