@@ -73,25 +73,32 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
     output = ""
     print(crypto_type + "ing with " + enc_option)
 
+    if enc_option == ENC_TYPES[0]:
+        method = AES_128_symmetric_key(bytes(key, encoding='utf-8'))
+        if crypto_type == CRYPTO_TYPE[0]:
+            ciphertext, key = method.encrypt(message)
+            output = formatEncOutput(ciphertext, key)
+        else:
+            plaintext = method.decrypt(bytes(message, encoding='utf-8'))
+            output = "Message:\n" + str(plaintext)
+            
     if enc_option == ENC_TYPES[1]:
         method = AES_256_custom_key(key)
         if crypto_type == CRYPTO_TYPE[0]:
-            
             ciphertext = method.encrypt(message)
             output = ciphertext
         else:
-            
             plaintext = method.decrypt(message)
             output = plaintext
 
         
     if crypto_type == CRYPTO_TYPE[0]:
 
-        if enc_option == ENC_TYPES[0]:
-            ciphertext, key = encryptAES(message, bytes(key, encoding='utf-8'))
-            output = formatEncOutput(ciphertext, key)
+      #  if enc_option == ENC_TYPES[0]:
+      #      ciphertext, key = encryptAES(message, bytes(key, encoding='utf-8'))
+      #      output = formatEncOutput(ciphertext, key)
 
-        elif enc_option == ENC_TYPES[2]:
+        if enc_option == ENC_TYPES[2]:
             ciphertext, publicKey, privateKey = encryptRSA(message, key)
             plaintext = decryptRSA(ciphertext, privateKey)
 
@@ -99,11 +106,11 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
 
     else:
 
-        if enc_option == ENC_TYPES[0]:
-            plaintext = decryptAES(bytes(message, encoding='utf-8'), bytes(key, encoding='utf-8'))
-            output = "Message:\n" + str(plaintext)
+   #     if enc_option == ENC_TYPES[0]:
+   #         plaintext = decryptAES(bytes(message, encoding='utf-8'), bytes(key, encoding='utf-8'))
+   #         output = "Message:\n" + str(plaintext)
 
-        elif enc_option == ENC_TYPES[2]:
+        if enc_option == ENC_TYPES[2]:
             plaintext = decryptRSA(message, key)
             output = "Message:\n" + str(plaintext)
 
