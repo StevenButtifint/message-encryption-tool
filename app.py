@@ -4,6 +4,7 @@ from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, St
 
 from methods.AES_128_symmetric_key import AES_128_symmetric_key
 from methods.AES_256_custom_key import AES_256_custom_key
+from methods.RSA_512_asymmetric_key import RSA_512_asymmetric_key
 
 #rsa
 import rsa
@@ -20,7 +21,7 @@ COL_SECND   = "cyan2"
 COL_THIRD   = "DarkSlateGray3"
 COL_TEXT    = "white"
 
-ENC_TYPES   = ["AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA Asymmetric-Key"]
+ENC_TYPES   = ["AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
 CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
@@ -63,7 +64,7 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
             plaintext = method.decrypt(message)
             output = "Message:\n" + str(plaintext)
             
-    if enc_option == ENC_TYPES[1]:
+    elif enc_option == ENC_TYPES[1]:
         method = AES_256_custom_key(key)
         if crypto_type == CRYPTO_TYPE[0]:
             ciphertext = method.encrypt(message)
@@ -72,16 +73,34 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
             plaintext = method.decrypt(message)
             output = plaintext
 
-        
-    if crypto_type == CRYPTO_TYPE[0]:
-        if enc_option == ENC_TYPES[2]:
-            ciphertext, publicKey, privateKey = encryptRSA(message, key)
-            plaintext = decryptRSA(ciphertext, privateKey)
-            output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext) + "dectypted again:\n" + plaintext
-    else:
-        if enc_option == ENC_TYPES[2]:
-            plaintext = decryptRSA(message, key)
+    elif enc_option == ENC_TYPES[2]:
+        method = RSA_512_asymmetric_key(key)
+        if crypto_type == CRYPTO_TYPE[0]:
+            ciphertext, publicKey, privateKey = method.encrypt(message)
+            print("working types")
+            print(type(privateKey))
+            print(type(ciphertext))
+            #plaintext = method.decrypt(ciphertext, privateKey)
+            output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext)[2:-1]# + "\ndectypted again:\n" + plaintext
+
+
+        else:
+            
+            plaintext = method.decrypt(message, key)#SK
             output = "Message:\n" + str(plaintext)
+            
+    
+
+        
+  #  if crypto_type == CRYPTO_TYPE[0]:
+  #      if enc_option == ENC_TYPES[2]:
+  #          ciphertext, publicKey, privateKey = encryptRSA(message, key)
+   #         plaintext = decryptRSA(ciphertext, privateKey)
+   #         output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext) + "dectypted again:\n" + plaintext
+    #else:
+    #    if enc_option == ENC_TYPES[2]:
+    #        plaintext = decryptRSA(message, key)
+    #        output = "Message:\n" + str(plaintext)
 
 
     setOutputText(outpt_txt, output)
