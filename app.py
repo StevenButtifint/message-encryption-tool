@@ -29,6 +29,40 @@ class messageEncryptionWindow:
         self._makeHomePage()
 
         
+    def _makeHomePage(self):
+        title_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.06, relx=0, rely=0)
+        title_lbl = self._makeLabel(title_frm, "Message Encrypter", 14).place(x=170, y=2)
+        
+        input_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.4, relx=0, rely=0.062)
+        messg_lbl = self._makeLabel(input_frm, "Enter Message:", 12).place(x=10, y=35)
+        messg_ent = Text(input_frm, width=60, height=10, bg=self.col_third, fg=self.col_text)
+        messg_ent.place(x=10, y=60)
+
+        opton_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.15, relx=0, rely=0.464)
+        #
+        encry_lbl = self._makeLabel(opton_frm, "Encryption Method:", 12).place(x=10, y=243)
+        crypto_methods = StringVar(opton_frm)
+        crypto_methods.set(self.method_labels[0]) #default value
+        dropD_opM = OptionMenu(opton_frm, crypto_methods, *self.method_labels,
+                               command= lambda x=None: self._makeCustomInput(messg_ent.get("1.0","end"), operation_type.get(), crypto_methods.get()))
+        dropD_opM.config(width=21, bg=self.col_third, fg=self.col_text)
+        dropD_opM.place(x=150, y=240)
+        #
+        type_lbl = self._makeLabel(opton_frm, "Type:", 12).place(x=330, y=243)
+        operation_type = StringVar(opton_frm)
+        operation_type.set("> Select <") #default value
+        dropD_opM = OptionMenu(opton_frm, operation_type, *self.crypto_types,
+                              command= lambda x=None: self._makeCustomInput(messg_ent.get("1.0","end"), operation_type.get(), crypto_methods.get()))
+        dropD_opM.config(width=11, bg=self.col_third, fg=self.col_text)
+        dropD_opM.place(x=380, y=240)
+        #
+        outpt_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.4, relx=0, rely=0.616)
+        outpt_lbl = self._makeLabel(outpt_frm, "OUTPUT", 12).place(x=230, y=310)
+        outpt_txt = Text(outpt_frm, width=60, height=10, bg=self.col_third, fg=self.col_text)
+        outpt_txt.configure(state=DISABLED)
+        outpt_txt.place(x=10, y=330)
+
+
 
 
 
@@ -37,10 +71,10 @@ def formatEncOutput(ciphertext, key):
     
 
 def setOutputText(outpt_txt, content):
-    outpt_txt.configure(state=tk.NORMAL)
+    outpt_txt.configure(state=NORMAL)
     outpt_txt.delete('1.0', tk.END)
     outpt_txt.insert("1.0", content)
-    outpt_txt.configure(state=tk.DISABLED)
+    outpt_txt.configure(state=DISABLED)
     
 
 def processMessage(message, key, crypto_type, enc_option, outpt_txt):
@@ -75,7 +109,6 @@ def processMessage(message, key, crypto_type, enc_option, outpt_txt):
             print(type(ciphertext))
             #plaintext = method.decrypt(ciphertext, privateKey)
             output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext)[2:-1]# + "\ndectypted again:\n" + plaintext
-
 
         else:
             
@@ -145,35 +178,4 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     proce_btn.place(x=380, y=280)
 
     
-def createInterface():
-    title_frm = makeFrame(root).place(relwidth=1, relheight=0.06, relx=0, rely=0)
-    title_lbl = makeLabel(title_frm, "Message Encrypter", 14).place(x=170, y=2)
-    
-    input_frm = makeFrame(root).place(relwidth=1, relheight=0.4, relx=0, rely=0.062)
-    messg_lbl = makeLabel(input_frm, "Enter Message:", 12).place(x=10, y=35)
-    messg_ent = tk.Text(input_frm, width=60, height=10, bg=COL_THIRD, fg=COL_TEXT)
-    messg_ent.place(x=10, y=60)
-
-    opton_frm = makeFrame(root).place(relwidth=1, relheight=0.15, relx=0, rely=0.464)
-    #
-    encry_lbl = makeLabel(opton_frm, "Encryption Method:", 12).place(x=10, y=243)
-    enc_methods = StringVar(opton_frm)
-    enc_methods.set(ENC_TYPES[0]) #default value
-    dropD_opM = OptionMenu(opton_frm, enc_methods, *ENC_TYPES)
-    dropD_opM.config(width=21, bg=COL_THIRD, fg=COL_TEXT)
-    dropD_opM.place(x=150, y=240)
-    #
-    type_lbl = makeLabel(opton_frm, "Type:", 12).place(x=330, y=243)
-    operation_type = StringVar(opton_frm)
-    operation_type.set("> Select <") #default value
-    dropD_opM = OptionMenu(opton_frm, operation_type, *CRYPTO_TYPE,
-                          command= lambda x=None: makeCustomInput(operation_type, messg_ent, enc_methods, outpt_txt))
-    dropD_opM.config(width=11, bg=COL_THIRD, fg=COL_TEXT)
-    dropD_opM.place(x=380, y=240)
-    #
-    outpt_frm = makeFrame(root).place(relwidth=1, relheight=0.4, relx=0, rely=0.616)
-    outpt_lbl = makeLabel(outpt_frm, "OUTPUT", 12).place(x=230, y=310)
-    outpt_txt = tk.Text(outpt_frm, width=60, height=10, bg=COL_THIRD, fg=COL_TEXT)
-    outpt_txt.configure(state=tk.DISABLED)
-    outpt_txt.place(x=10, y=330)
 
