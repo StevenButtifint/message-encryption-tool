@@ -5,9 +5,30 @@ from res.methods.AES_256_custom_key import AES_256_custom_key
 from res.methods.RSA_512_asymmetric_key import RSA_512_asymmetric_key
 
 
+class messageEncryptionWindow:
+    def __init__(self, parent):
+        self.window = parent
+        self.window.geometry("500x500")
+        self.window.title("Message Encryption Tool")
+        self.window.iconbitmap("res/icons/icon.ico")
+        self.window.resizable(width=False, height=False)
 
+        self.col_prime = "cyan4"
+        self.col_second = "cyan2"
+        self.col_third = "DarkSlateGray3"
+        self.col_text = "black"
 
+        self.method_labels = ["AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
+        self.method_classes = [AES_128_symmetric_key, AES_256_custom_key, RSA_512_asymmetric_key]
 
+        self.crypto_types = ["Encrypt", "Decrypt"]
+
+        self.custom_input_frame = None
+        
+        canvas = Canvas(self.window, height=500, width=500, bg=self.col_second).pack()
+        self._makeHomePage()
+
+        
 
 
 
@@ -73,6 +94,9 @@ def makeFrame(root):
 def makeLabel(frame, text, font_size):
     return tk.Label(frame, text=text, bg=COL_PRIME, fg=COL_SECND, font=(COL_SECND,font_size))
     
+if __name__ == "__main__":
+    root = Tk()
+    messageEncryptionWindow(root)
 
 def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     global key_lbl, key_ent, temp_frm
@@ -153,11 +177,3 @@ def createInterface():
     outpt_txt.configure(state=tk.DISABLED)
     outpt_txt.place(x=10, y=330)
 
-    
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.resizable(width=False, height=False)
-    root.title(APP_TITLE)
-    root.iconbitmap(APP_ICON)
-    canvas = tk.Canvas(root, height=WINDOW_H, width=WINDOW_W, bg=COL_SECND).pack()
-    createInterface()
