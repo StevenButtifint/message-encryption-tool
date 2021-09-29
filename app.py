@@ -1,25 +1,13 @@
-import tkinter as tk
-from tkinter import filedialog, Text, Listbox, filedialog, Entry, OptionMenu, StringVar
-
+from tkinter import Tk, filedialog, Text, Listbox, filedialog, Entry, OptionMenu, StringVar, Frame, Label, Text, Canvas, DISABLED, NORMAL, Button
 
 from res.methods.AES_128_symmetric_key import AES_128_symmetric_key
 from res.methods.AES_256_custom_key import AES_256_custom_key
 from res.methods.RSA_512_asymmetric_key import RSA_512_asymmetric_key
 
 
-APP_TITLE   = "Message Encryption Tool"
-APP_ICON    = "res/icons/icon.ico"
 
-WINDOW_H    = 500
-WINDOW_W    = 500
 
-COL_PRIME   = "cyan4"
-COL_SECND   = "cyan2"
-COL_THIRD   = "DarkSlateGray3"
-COL_TEXT    = "black"
 
-ENC_TYPES   = ["AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
-CRYPTO_TYPE = ["Encrypt", "Decrypt"]
 
 
 
