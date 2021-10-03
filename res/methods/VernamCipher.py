@@ -17,3 +17,10 @@ class VernamCipher(object):
             ciphertext += (self.alphabet[(p_idx + k_idx) % self.alphabet_len])
         return ciphertext
 
+    def decrypt(self, ciphertext):
+        plaintext = ""
+        for idx, letter in enumerate(ciphertext):
+            p_idx = self.alphabet.find(letter)
+            k_idx = self.alphabet.find(self.key[idx % self.key_len])
+            plaintext += (self.alphabet[(p_idx - k_idx) % self.alphabet_len])
+        return plaintext
