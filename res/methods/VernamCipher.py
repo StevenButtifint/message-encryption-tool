@@ -24,3 +24,11 @@ class VernamCipher(object):
             k_idx = self.alphabet.find(self.key[idx % self.key_len])
             plaintext += (self.alphabet[(p_idx - k_idx) % self.alphabet_len])
         return plaintext
+    
+    def sanitizeEncrypt(self, plaintext):
+        ciphertext = self.encrypt(plaintext)
+        return ("Key:\n" + str(self.key) +"\n\n" + "Ciphertext:\n" + str(ciphertext))
+
+    def sanitizeDecrypt(self, ciphertext):
+        plaintext = self.decrypt(ciphertext)
+        return ("Key:\n" + str(self.key) +"\n\n" + "Plaintext:\n" + str(plaintext))
