@@ -120,6 +120,12 @@ class messageEncryptionWindow:
                 
         self.setOutputText(self.output_box, output)
 
+    @staticmethod
+    def setOutputText(text_box, content):
+        text_box.configure(state=NORMAL)
+        text_box.delete('1.0', END)
+        text_box.insert("1.0", content)
+        text_box.configure(state=DISABLED)
 
 def makeLabel(frame, text, font_size):
     return tk.Label(frame, text=text, bg=COL_PRIME, fg=COL_SECND, font=(COL_SECND,font_size))
