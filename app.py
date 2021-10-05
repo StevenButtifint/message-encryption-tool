@@ -1,4 +1,4 @@
-from tkinter import Tk, filedialog, Text, Listbox, filedialog, Entry, OptionMenu, StringVar, Frame, Label, Text, Canvas, DISABLED, NORMAL, Button
+from tkinter import Tk, filedialog, Text, Listbox, filedialog, Entry, OptionMenu, StringVar, Frame, Label, Text, Canvas, DISABLED, NORMAL, Button, END
 
 from res.methods.AES_128_symmetric_key import AES_128_symmetric_key
 from res.methods.AES_256_custom_key import AES_256_custom_key
@@ -39,7 +39,7 @@ class messageEncryptionWindow:
         messg_ent.place(x=10, y=60)
 
         opton_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.15, relx=0, rely=0.464)
-        #
+        
         encry_lbl = self._makeLabel(opton_frm, "Encryption Method:", 12).place(x=10, y=243)
         crypto_methods = StringVar(opton_frm)
         crypto_methods.set(self.method_labels[0]) #default value
@@ -47,7 +47,7 @@ class messageEncryptionWindow:
                                command= lambda x=None: self._makeCustomInput(messg_ent.get("1.0","end"), operation_type.get(), crypto_methods.get()))
         dropD_opM.config(width=21, bg=self.col_third, fg=self.col_text)
         dropD_opM.place(x=150, y=240)
-        #
+        
         type_lbl = self._makeLabel(opton_frm, "Type:", 12).place(x=330, y=243)
         operation_type = StringVar(opton_frm)
         operation_type.set("> Select <") #default value
@@ -55,32 +55,55 @@ class messageEncryptionWindow:
                               command= lambda x=None: self._makeCustomInput(messg_ent.get("1.0","end"), operation_type.get(), crypto_methods.get()))
         dropD_opM.config(width=11, bg=self.col_third, fg=self.col_text)
         dropD_opM.place(x=380, y=240)
-        #
+        
         outpt_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.4, relx=0, rely=0.616)
         outpt_lbl = self._makeLabel(outpt_frm, "OUTPUT", 12).place(x=230, y=310)
-        outpt_txt = Text(outpt_frm, width=60, height=10, bg=self.col_third, fg=self.col_text)
-        outpt_txt.configure(state=DISABLED)
-        outpt_txt.place(x=10, y=330)
+        self.output_box = Text(outpt_frm, width=60, height=10, bg=self.col_third, fg=self.col_text)
+        self.output_box.configure(state=DISABLED)
+        self.output_box.place(x=10, y=330)
 
 
+    def _makeCustomInput(self, input_string, operation_type, crypto_method):
+
+        try:
+            self.custom_input_frame.destroy()
+        except:
+            pass
+        self.custom_input_frame = self._makeFrame(self.window).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
+
+                                # label, font size, x, y, entry width, x, y
+        enc_content = [["Shift Amount:", 12, 10, 278, 35, 110, 280],
+                       ["Key (word):", 12, 10, 278, 35, 110, 280],
+                       ["Input Key:", 12, 10, 278, 37, 90, 280],
+                       ["Enter Custom Key String:", 12, 10, 278, 21, 190, 280],
+                       ["Input Key:", 12, 10, 278, 37, 90, 280]]
+        
+                                # label, font size, x, y, entry width, x, y
+        dec_content = [["Shift Amount:", 12, 10, 278, 35, 110, 280],
+                       ["Key (word):", 12, 10, 278, 35, 110, 280],
+                       ["Reuse previous key:", 12, 10, 278, 26, 160, 280],
+                       ["Enter Custom Key String:", 12, 10, 278, 21, 190, 280],
+                       ["Reuse previous key:", 12, 10, 278, 26, 160, 280]]
+
+        method_idx = self.method_labels.index(crypto_method)
+        
+        if operation_type == self.crypto_types[0]:
+            #encrypt
+            self._makeLabel(self.custom_input_frame, enc_content[method_idx][0], enc_content[method_idx][1]).place(x=enc_content[method_idx][2], y=enc_content[method_idx][3])
+            key_ent = Entry(self.custom_input_frame, width=enc_content[method_idx][4], bg=self.col_third, fg=self.col_text)
+            key_ent.place(x=enc_content[method_idx][5], y=enc_content[method_idx][6])
+            
+        else:
+            #decrypt
+            self._makeLabel(self.custom_input_frame, dec_content[method_idx][0], dec_content[method_idx][1]).place(x=dec_content[method_idx][2], y=dec_content[method_idx][3])
+            key_ent = Entry(self.custom_input_frame, width=dec_content[method_idx][4], bg=self.col_third, fg=self.col_text)
+            key_ent.place(x=dec_content[method_idx][5], y=dec_content[method_idx][6])
+
+        process_button = Button(self.custom_input_frame, text="PROCESS", width=14, bg=self.col_third, fg=self.col_text,
+                              command= lambda: self.processMessage(input_string, key_ent.get(), method_idx, operation_type))
+        process_button.place(x=380, y=280)
 
 
-
-def formatEncOutput(ciphertext, key):
-    return "Key:\n" + str(key)[2:-1] +"\n\n" + "Message:\n" + str(ciphertext)[2:-1]
-    
-
-def setOutputText(outpt_txt, content):
-    outpt_txt.configure(state=NORMAL)
-    outpt_txt.delete('1.0', tk.END)
-    outpt_txt.insert("1.0", content)
-    outpt_txt.configure(state=DISABLED)
-    
-
-def processMessage(message, key, crypto_type, enc_option, outpt_txt):
-
-    output = ""
-    print(crypto_type + "ing with " + enc_option)
 
     if enc_option == ENC_TYPES[0]:
         method = AES_128_symmetric_key(key)
