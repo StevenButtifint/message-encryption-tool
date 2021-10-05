@@ -104,47 +104,21 @@ class messageEncryptionWindow:
         process_button.place(x=380, y=280)
 
 
+    def processMessage(self, input_string, key, operation_index, crypto_type):
 
-    if enc_option == ENC_TYPES[0]:
-        method = AES_128_symmetric_key(key)
-        if crypto_type == CRYPTO_TYPE[0]:
-            ciphertext, key = method.encrypt(message)
-            output = formatEncOutput(ciphertext, key)
+        output = ""
+        operation_method = self.method_classes[operation_index]
+        
+        print(crypto_type + "ing with " + operation_method.__name__)
+
+        method = operation_method(key)
+        
+        if crypto_type == self.crypto_types[0]:
+            output = method.sanitizeEncrypt(input_string)
         else:
-            plaintext = method.decrypt(message)
-            output = "Message:\n" + str(plaintext)
-            
-    elif enc_option == ENC_TYPES[1]:
-        method = AES_256_custom_key(key)
-        if crypto_type == CRYPTO_TYPE[0]:
-            ciphertext = method.encrypt(message)
-            output = ciphertext
-        else:
-            plaintext = method.decrypt(message)
-            output = plaintext
-
-    elif enc_option == ENC_TYPES[2]:
-        method = RSA_512_asymmetric_key(key)
-        if crypto_type == CRYPTO_TYPE[0]:
-            ciphertext, publicKey, privateKey = method.encrypt(message)
-            print("working types")
-            print(type(privateKey))
-            print(type(ciphertext))
-            #plaintext = method.decrypt(ciphertext, privateKey)
-            output = "PublicKey:\n" + str(publicKey) +"\n\n" + "PrivateKey:\n" + str(privateKey) +"\n\n" + "Message:\n" + str(ciphertext)[2:-1]# + "\ndectypted again:\n" + plaintext
-
-        else:
-            
-            plaintext = method.decrypt(message, key)#SK
-            output = "Message:\n" + str(plaintext)
-
-            
-    setOutputText(outpt_txt, output)
-    
-
-def makeFrame(root):
-    frame = tk.Frame(root, bg=COL_PRIME)
-    return frame
+            output = method.sanitizeDecrypt(input_string)
+                
+        self.setOutputText(self.output_box, output)
 
 
 def makeLabel(frame, text, font_size):
