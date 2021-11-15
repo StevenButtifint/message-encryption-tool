@@ -2,7 +2,7 @@ from cryptography.fernet import Fernet
 
 
 class AES_128_symmetric_key(object):
-
+    
     def __init__(self, key):
         self.key = bytes(key, encoding='utf-8')
 
@@ -25,3 +25,7 @@ class AES_128_symmetric_key(object):
         ciphertext, self.key = self.encrypt(plaintext)
         return "Key:\n" + str(self.key)[2:-1] + "\n\nCiphertext:\n" + str(ciphertext)[2:-1]
 
+    def sanitizeDecrypt(self, ciphertext):
+        plaintext = self.decrypt(ciphertext)
+        return "Plaintext:\n" + str(plaintext)
+        
