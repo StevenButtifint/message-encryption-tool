@@ -19,3 +19,9 @@ class AES_128_symmetric_key(object):
         msg_encoded = f.decrypt(bytes(ciphertext, encoding='utf-8'))
         plaintext = msg_encoded.decode()
         return plaintext
+
+    def sanitizeEncrypt(self, plaintext):
+        print(plaintext)
+        ciphertext, self.key = self.encrypt(plaintext)
+        return "Key:\n" + str(self.key)[2:-1] + "\n\nCiphertext:\n" + str(ciphertext)[2:-1]
+
