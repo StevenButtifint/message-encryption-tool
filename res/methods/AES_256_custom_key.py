@@ -6,7 +6,8 @@ from Crypto.Cipher import AES
 
 class AES_256_custom_key(object):
 
-    def __init__(self, key): 
+    def __init__(self, key):
+        self.key_string = key
         self.key = hashlib.sha256(key.encode()).digest()
         self.block_size = AES.block_size
         
