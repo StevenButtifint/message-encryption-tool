@@ -26,6 +26,10 @@ class AES_256_custom_key(object):
         ciphertext = self.encrypt(plaintext)
         return "Key:\n" + self.key_string + "\n\nCiphertext:\n" + str(ciphertext)[2:-1]
 
+    def sanitizeDecrypt(self, ciphertext):
+        plaintext = self.decrypt(ciphertext)
+        return "Plaintext:\n" + str(plaintext)
+    
     #Internal class functions
     def _encodeBase64(self, data):
         return base64.b64encode(data)
