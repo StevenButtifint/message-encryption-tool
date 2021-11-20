@@ -127,9 +127,6 @@ class messageEncryptionWindow:
         text_box.insert("1.0", content)
         text_box.configure(state=DISABLED)
 
-if __name__ == "__main__":
-    root = Tk()
-    messageEncryptionWindow(root)
 
 def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     global key_lbl, key_ent, temp_frm
@@ -180,4 +177,7 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     proce_btn.place(x=380, y=280)
 
     
+if __name__ == "__main__":
+    root = Tk()
+    messageEncryptionWindow(root)
 
