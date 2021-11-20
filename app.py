@@ -127,9 +127,6 @@ class messageEncryptionWindow:
         text_box.insert("1.0", content)
         text_box.configure(state=DISABLED)
 
-def makeLabel(frame, text, font_size):
-    return tk.Label(frame, text=text, bg=COL_PRIME, fg=COL_SECND, font=(COL_SECND,font_size))
-    
 if __name__ == "__main__":
     root = Tk()
     messageEncryptionWindow(root)
@@ -174,6 +171,8 @@ def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
             key_ent = tk.Entry(temp_frm, width=26, bg=COL_THIRD, fg=COL_TEXT)
             key_ent.place(x=160, y=280)
         
+    def _makeLabel(self, frame, text, font_size):
+        return Label(frame, text=text, bg=self.col_prime, fg=self.col_second, font=(self.col_second,font_size))
 
 
     proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
