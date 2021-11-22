@@ -131,43 +131,7 @@ class messageEncryptionWindow:
 def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     global key_lbl, key_ent, temp_frm
 
-    try:
-        temp_frm.destroy()
-    except:
-        pass
-    
-    temp_frm = makeFrame(root).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
 
-    if enc_option.get() == ENC_TYPES[0]:#aes
-        if (operation.get() == CRYPTO_TYPE[1]):
-            key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
-            key_ent = tk.Entry(temp_frm, width=37, bg=COL_THIRD, fg=COL_TEXT)
-            key_ent.place(x=90, y=280)
-        else:
-            key_lbl = makeLabel(temp_frm, "Reuse previous key:", 12).place(x=10, y=278)
-            key_ent = tk.Entry(temp_frm, width=26, bg=COL_THIRD, fg=COL_TEXT)
-            key_ent.place(x=160, y=280)
-
-    if enc_option.get() == ENC_TYPES[1]:#aes custom key
-        if (operation.get() == CRYPTO_TYPE[1]):
-            key_lbl = makeLabel(temp_frm, "Enter Custom Key String:", 12).place(x=10, y=278)
-            key_ent = tk.Entry(temp_frm, width=21, bg=COL_THIRD, fg=COL_TEXT)
-            key_ent.place(x=190, y=280)
-        else:
-            key_lbl = makeLabel(temp_frm, "Enter Custom Key String:", 12).place(x=10, y=278)
-            key_ent = tk.Entry(temp_frm, width=21, bg=COL_THIRD, fg=COL_TEXT)
-            key_ent.place(x=190, y=280)
-            
-    if enc_option.get() == ENC_TYPES[2]:#rsa
-        if (operation.get() == CRYPTO_TYPE[1]):
-            key_lbl = makeLabel(temp_frm, "Input Key:", 12).place(x=10, y=278)
-            key_ent = tk.Entry(temp_frm, width=37, bg=COL_THIRD, fg=COL_TEXT)
-            key_ent.place(x=90, y=280)
-        else:
-            key_lbl = makeLabel(temp_frm, "Reuse previous key:", 12).place(x=10, y=278)
-            key_ent = tk.Entry(temp_frm, width=26, bg=COL_THIRD, fg=COL_TEXT)
-            key_ent.place(x=160, y=280)
-        
     def _makeLabel(self, frame, text, font_size):
         return Label(frame, text=text, bg=self.col_prime, fg=self.col_second, font=(self.col_second,font_size))
 
