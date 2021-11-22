@@ -18,8 +18,8 @@ class messageEncryptionWindow:
         self.col_third = "DarkSlateGray3"
         self.col_text = "black"
 
-        self.method_labels = ["AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
-        self.method_classes = [AES_128_symmetric_key, AES_256_custom_key, RSA_512_asymmetric_key]
+        self.method_labels = ["Caesar Cipher", "Vernam Cipher", "AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
+        self.method_classes = [CaesarCipher, VernamCipher, AES_128_symmetric_key, AES_256_custom_key, RSA_512_asymmetric_key]
 
         self.crypto_types = ["Encrypt", "Decrypt"]
 
