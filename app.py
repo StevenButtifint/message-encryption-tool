@@ -129,8 +129,6 @@ class messageEncryptionWindow:
         text_box.configure(state=DISABLED)
 
 
-def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
-    global key_lbl, key_ent, temp_frm
     def _makeFrame(self, frame):
         return Frame(frame, bg=self.col_prime)
 
