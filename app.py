@@ -137,9 +137,6 @@ class messageEncryptionWindow:
         return Label(frame, text=text, bg=self.col_prime, fg=self.col_second, font=(self.col_second,font_size))
 
 
-    proce_btn = tk.Button(temp_frm, text="PROCESS", width=14, bg=COL_THIRD, fg=COL_TEXT,
-                          command= lambda: processMessage(messg_ent.get("1.0","end"), key_ent.get(), operation.get(), enc_option.get(), outpt_txt))
-    proce_btn.place(x=380, y=280)
 
     
 if __name__ == "__main__":
