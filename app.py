@@ -131,6 +131,8 @@ class messageEncryptionWindow:
 
 def makeCustomInput(operation, messg_ent, enc_option, outpt_txt):
     global key_lbl, key_ent, temp_frm
+    def _makeFrame(self, frame):
+        return Frame(frame, bg=self.col_prime)
 
 
     def _makeLabel(self, frame, text, font_size):
