@@ -16,3 +16,17 @@ class CaesarCipher(object):
                 ciphertext += self.alphabet[(index + self.shift) % self.alphabet_len]
         return ciphertext
 
+    def decrypt(self, ciphertext):
+        plaintext = ""
+        self.shift = int(self.shift)
+        for letter in ciphertext:
+            try:
+                index = self.alphabet.find(letter)
+                if index != -1:
+                    plaintext += self.alphabet[(index - self.shift) % self.alphabet_len]
+            except:
+                pass
+        return plaintext
+
+    
+        
