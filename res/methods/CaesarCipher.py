@@ -30,3 +30,10 @@ class CaesarCipher(object):
 
     
         
+    def _setShift(self):
+        if self.shift == "":
+            self.shift = randint(2, self.alphabet_len)
+        else:
+            self.shift = int(self.shift)
+
+
