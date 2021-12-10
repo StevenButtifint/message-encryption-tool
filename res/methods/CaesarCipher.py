@@ -37,3 +37,7 @@ class CaesarCipher(object):
             self.shift = int(self.shift)
 
 
+    def sanitizeEncrypt(self, plaintext):
+        ciphertext = self.encrypt(plaintext)
+        return ("Shift:\n" + str(self.shift) +"\n\n" + "Ciphertext:\n" + str(ciphertext))
+
