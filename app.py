@@ -5,6 +5,8 @@ from res.methods.AES_256_custom_key import AES_256_custom_key
 from res.methods.RSA_512_asymmetric_key import RSA_512_asymmetric_key
 from res.methods.CaesarCipher import CaesarCipher
 from res.methods.VernamCipher import VernamCipher
+from constants import *
+
 
 class messageEncryptionWindow:
     def __init__(self, parent):
@@ -129,9 +131,10 @@ class messageEncryptionWindow:
         text_box.configure(state=DISABLED)
 
 
-    def _makeFrame(self, frame):
-        return Frame(frame, bg=self.col_prime)
-
+    @staticmethod
+    def _makeFrame(frame):
+        return Frame(frame, bg=COLOUR_PRIME)
+    
 
     def _makeLabel(self, frame, text, font_size):
         return Label(frame, text=text, bg=self.col_prime, fg=self.col_second, font=(self.col_second,font_size))
