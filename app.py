@@ -23,12 +23,9 @@ class messageEncryptionWindow:
 
         self.method_labels = ["Caesar Cipher", "Vernam Cipher", "AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
         self.method_classes = [CaesarCipher, VernamCipher, AES_128_symmetric_key, AES_256_custom_key, RSA_512_asymmetric_key]
-
         self.crypto_types = ["Encrypt", "Decrypt"]
-
         self.custom_input_frame = None
-        
-        canvas = Canvas(self.window, height=500, width=500, bg=self.col_second).pack()
+        canvas = Canvas(self.window, height=500, width=500, bg=COLOUR_SECOND).pack()
         self._makeHomePage()
 
         
