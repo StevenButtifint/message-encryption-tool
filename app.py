@@ -133,9 +133,11 @@ class messageEncryptionWindow:
         return Frame(frame, bg=COLOUR_PRIME)
     
 
-    def _makeLabel(self, frame, text, font_size):
-        return Label(frame, text=text, bg=self.col_prime, fg=self.col_second, font=(self.col_second,font_size))
 
+    @staticmethod
+    def _makeLabel(frame, text, font_size, x, y):
+        label = Label(frame, text=text, bg=COLOUR_PRIME, fg=COLOUR_SECOND, font=(COLOUR_SECOND,font_size))
+        label.place(x=x, y=y)
 
 
     
