@@ -1,11 +1,11 @@
 from random import randint
 
 class CaesarCipher(object):
-
     def __init__(self, shift):
         self.shift = shift
         self.alphabet = "abcdefghijklmnopqrstuvwxyz"
         self.alphabet_len = len(self.alphabet)
+
 
     def encrypt(self, plaintext):
         ciphertext = ""
@@ -15,6 +15,7 @@ class CaesarCipher(object):
             if index != -1:
                 ciphertext += self.alphabet[(index + self.shift) % self.alphabet_len]
         return ciphertext
+
 
     def decrypt(self, ciphertext):
         plaintext = ""
@@ -28,7 +29,6 @@ class CaesarCipher(object):
                 pass
         return plaintext
 
-    
         
     def _setShift(self):
         if self.shift == "":
@@ -40,6 +40,7 @@ class CaesarCipher(object):
     def sanitizeEncrypt(self, plaintext):
         ciphertext = self.encrypt(plaintext)
         return ("Shift:\n" + str(self.shift) +"\n\n" + "Ciphertext:\n" + str(ciphertext))
+
 
     def sanitizeDecrypt(self, ciphertext):
         plaintext = self.decrypt(ciphertext)
