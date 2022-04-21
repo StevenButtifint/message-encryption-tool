@@ -2,9 +2,9 @@ from cryptography.fernet import Fernet
 
 
 class AES_128_symmetric_key(object):
-    
     def __init__(self, key):
         self.key = bytes(key, encoding='utf-8')
+
 
     def encrypt(self, plaintext):
         if str(self.key) == "b''":
@@ -14,16 +14,19 @@ class AES_128_symmetric_key(object):
         ciphertext = f.encrypt(msg_encoded)
         return ciphertext, self.key
 
+
     def decrypt(self, ciphertext):
         f = Fernet(self.key)
         msg_encoded = f.decrypt(bytes(ciphertext, encoding='utf-8'))
         plaintext = msg_encoded.decode()
         return plaintext
 
+
     def sanitizeEncrypt(self, plaintext):
         print(plaintext)
         ciphertext, self.key = self.encrypt(plaintext)
         return "Key:\n" + str(self.key)[2:-1] + "\n\nCiphertext:\n" + str(ciphertext)[2:-1]
+
 
     def sanitizeDecrypt(self, ciphertext):
         plaintext = self.decrypt(ciphertext)
