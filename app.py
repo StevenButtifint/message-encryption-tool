@@ -35,7 +35,7 @@ class messageEncryptionWindow:
         
         input_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.4, relx=0, rely=0.062)
         messg_lbl = self._makeLabel(input_frm, "Enter Message:", 12).place(x=10, y=35)
-        messg_ent = Text(input_frm, width=60, height=10, bg=self.col_third, fg=self.col_text)
+        messg_ent = Text(input_frm, width=60, height=10, bg=COLOUR_THIRD, fg=COLOUR_TEXT)
         messg_ent.place(x=10, y=60)
 
         opton_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.15, relx=0, rely=0.464)
@@ -45,7 +45,7 @@ class messageEncryptionWindow:
         crypto_methods.set(self.method_labels[0]) #default value
         dropD_opM = OptionMenu(opton_frm, crypto_methods, *self.method_labels,
                                command= lambda x=None: self._makeCustomInput(messg_ent.get("1.0","end"), operation_type.get(), crypto_methods.get()))
-        dropD_opM.config(width=21, bg=self.col_third, fg=self.col_text)
+        dropD_opM.config(width=21, bg=COLOUR_THIRD, fg=COLOUR_TEXT)
         dropD_opM.place(x=150, y=240)
         
         type_lbl = self._makeLabel(opton_frm, "Type:", 12).place(x=330, y=243)
@@ -53,12 +53,12 @@ class messageEncryptionWindow:
         operation_type.set("> Select <") #default value
         dropD_opM = OptionMenu(opton_frm, operation_type, *self.crypto_types,
                               command= lambda x=None: self._makeCustomInput(messg_ent.get("1.0","end"), operation_type.get(), crypto_methods.get()))
-        dropD_opM.config(width=11, bg=self.col_third, fg=self.col_text)
+        dropD_opM.config(width=11, bg=COLOUR_THIRD, fg=COLOUR_TEXT)
         dropD_opM.place(x=380, y=240)
         
         outpt_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.4, relx=0, rely=0.616)
         outpt_lbl = self._makeLabel(outpt_frm, "OUTPUT", 12).place(x=230, y=310)
-        self.output_box = Text(outpt_frm, width=60, height=10, bg=self.col_third, fg=self.col_text)
+        self.output_box = Text(outpt_frm, width=60, height=10, bg=COLOUR_THIRD, fg=COLOUR_TEXT)
         self.output_box.configure(state=DISABLED)
         self.output_box.place(x=10, y=330)
 
@@ -89,17 +89,17 @@ class messageEncryptionWindow:
         
         if operation_type == self.crypto_types[0]:
             #encrypt
-            self._makeLabel(self.custom_input_frame, enc_content[method_idx][0], enc_content[method_idx][1]).place(x=enc_content[method_idx][2], y=enc_content[method_idx][3])
-            key_ent = Entry(self.custom_input_frame, width=enc_content[method_idx][4], bg=self.col_third, fg=self.col_text)
+            self._makeLabel(self.custom_input_frame, enc_content[method_idx][0], enc_content[method_idx][1], enc_content[method_idx][2], enc_content[method_idx][3])
+            key_ent = Entry(self.custom_input_frame, width=enc_content[method_idx][4], bg=COLOUR_THIRD, fg=COLOUR_TEXT)
             key_ent.place(x=enc_content[method_idx][5], y=enc_content[method_idx][6])
             
         else:
             #decrypt
-            self._makeLabel(self.custom_input_frame, dec_content[method_idx][0], dec_content[method_idx][1]).place(x=dec_content[method_idx][2], y=dec_content[method_idx][3])
-            key_ent = Entry(self.custom_input_frame, width=dec_content[method_idx][4], bg=self.col_third, fg=self.col_text)
+            self._makeLabel(self.custom_input_frame, dec_content[method_idx][0], dec_content[method_idx][1], dec_content[method_idx][2], dec_content[method_idx][3])
+            key_ent = Entry(self.custom_input_frame, width=dec_content[method_idx][4], bg=COLOUR_THIRD, fg=COLOUR_TEXT)
             key_ent.place(x=dec_content[method_idx][5], y=dec_content[method_idx][6])
 
-        process_button = Button(self.custom_input_frame, text="PROCESS", width=14, bg=self.col_third, fg=self.col_text,
+        process_button = Button(self.custom_input_frame, text="PROCESS", width=14, bg=COLOUR_THIRD, fg=COLOUR_TEXT,
                               command= lambda: self.processMessage(input_string, key_ent.get(), method_idx, operation_type))
         process_button.place(x=380, y=280)
 
