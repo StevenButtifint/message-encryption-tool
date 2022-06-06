@@ -136,7 +136,7 @@ class messageEncryptionWindow:
 
     @staticmethod
     def _makeLabel(frame, text, font_size, x, y):
-        label = Label(frame, text=text, bg=COLOUR_PRIME, fg=COLOUR_SECOND, font=(COLOUR_SECOND,font_size))
+        label = tk.Label(frame, text=text, bg=COLOUR_PRIME, fg=COLOUR_SECOND, font=(COLOUR_SECOND,font_size))
         label.place(x=x, y=y)
 
 
