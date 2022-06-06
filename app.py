@@ -142,6 +142,6 @@ class messageEncryptionWindow:
 
     
 if __name__ == "__main__":
-    root = Tk()
+    root = tk.Tk()
     messageEncryptionWindow(root)
 
