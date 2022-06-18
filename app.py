@@ -3,8 +3,8 @@ from tkinter import Tk, filedialog, Text, Listbox, filedialog, Entry, OptionMenu
 from res.methods.AES_128_symmetric_key import AES_128_symmetric_key
 from res.methods.AES_256_custom_key import AES_256_custom_key
 from res.methods.RSA_512_asymmetric_key import RSA_512_asymmetric_key
-from res.methods.CaesarCipher import CaesarCipher
-from res.methods.VernamCipher import VernamCipher
+from cryptographyMethods.CaesarCipher import CaesarCipher
+from cryptographyMethods.VernamCipher import VernamCipher
 from constants import *
 
 
