@@ -11,9 +11,9 @@ from constants import *
 class messageEncryptionWindow:
     def __init__(self, parent):
         self.window = parent
-        self.window.geometry("500x500")
-        self.window.title("Message Encryption Tool")
-        self.window.iconbitmap("res/icons/icon.ico")
+        self.window.geometry(RESOLUTION)
+        self.window.title(TITLE)
+        self.window.iconbitmap(ICON_DIR)
         self.window.resizable(width=False, height=False)
 
         self.col_prime = "cyan4"
