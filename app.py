@@ -6,6 +6,8 @@ from res.methods.RSA_512_asymmetric_key import RSA_512_asymmetric_key
 from cryptographyMethods.CaesarCipher import CaesarCipher
 from cryptographyMethods.VernamCipher import VernamCipher
 from constants import *
+from interface import *
+
 
 
 class messageEncrypter:
