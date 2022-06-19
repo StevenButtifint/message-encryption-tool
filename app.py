@@ -8,13 +8,23 @@ from cryptographyMethods.VernamCipher import VernamCipher
 from constants import *
 
 
-class messageEncryptionWindow:
+class messageEncrypter:
     def __init__(self, parent):
         self.window = parent
         self.window.geometry(RESOLUTION)
         self.window.title(TITLE)
         self.window.iconbitmap(ICON_DIR)
         self.window.resizable(width=False, height=False)
+        
+        makeCanvas(self.window, 500, 500, COLOUR_SECOND)
+        titleFrame = makeFrame(self.window, 1, 0.06, 0, 0, COLOUR_PRIME, "nw")
+        self.shownOptions = self._makeHomeContent()
+        self.operation = makeOptionMenu(titleFrame, OPERATIONS, lambda x=None: self._updateOptions(), 8, 2, 2)
+        makeLabel(titleFrame, "message using", 12, 110, 2)
+        self.method = makeOptionMenu(titleFrame, CRYPTO_METHODS, lambda x=None: self._updateOptions(), 25, 230, 2)
+        makeLabel(titleFrame, "|", 16, 430, 0)
+        makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 450, 2)
+
 
         self.col_prime = "cyan4"
         self.col_second = "cyan2"
@@ -143,5 +153,5 @@ class messageEncryptionWindow:
     
 if __name__ == "__main__":
     root = tk.Tk()
-    messageEncryptionWindow(root)
+    messageEncrypter(root)
 
