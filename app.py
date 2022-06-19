@@ -26,10 +26,6 @@ class messageEncrypter:
         makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 450, 2)
 
 
-        self.col_prime = "cyan4"
-        self.col_second = "cyan2"
-        self.col_third = "DarkSlateGray3"
-        self.col_text = "black"
 
         self.method_labels = ["Caesar Cipher", "Vernam Cipher", "AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
         self.method_classes = [CaesarCipher, VernamCipher, AES_128_symmetric_key, AES_256_custom_key, RSA_512_asymmetric_key]
