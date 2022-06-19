@@ -126,24 +126,7 @@ class messageEncrypter:
                 
         self.setOutputText(self.output_box, output)
 
-    @staticmethod
-    def setOutputText(text_box, content):
-        text_box.configure(state=NORMAL)
-        text_box.delete('1.0', END)
-        text_box.insert("1.0", content)
-        text_box.configure(state=DISABLED)
 
-
-    @staticmethod
-    def _makeFrame(frame):
-        return Frame(frame, bg=COLOUR_PRIME)
-    
-
-
-    @staticmethod
-    def _makeLabel(frame, text, font_size, x, y):
-        label = tk.Label(frame, text=text, bg=COLOUR_PRIME, fg=COLOUR_SECOND, font=(COLOUR_SECOND,font_size))
-        label.place(x=x, y=y)
 
 
     
