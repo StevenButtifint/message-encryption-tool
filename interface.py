@@ -2,6 +2,14 @@ import tkinter as tk
 from constants import *
 
 
+
+def makeCanvas(frame, h, w, bg):
+    canvas = tk.Canvas(frame, height=h, width=w, bg=bg)
+    canvas.config(highlightthickness=0)
+    canvas.pack()
+    return canvas
+
+
 def setOutputText(text_box, content):
     text_box.configure(state=tk.NORMAL)
     text_box.delete('1.0', tk.END)
