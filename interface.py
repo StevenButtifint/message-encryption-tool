@@ -29,3 +29,13 @@ def makeLabel(frame, text, font_size, x, y):
     return label
 
 
+def makeOptionMenu(frame, options, func, w, x, y):
+    stringVar = tk.StringVar(frame)
+    stringVar.set(options[0])
+    optionMenu = tk.OptionMenu(frame, stringVar, *options, command= func)
+    optionMenu.config(width=w, bg=COLOUR_THIRD, fg=COLOUR_TEXT)
+    optionMenu["highlightthickness"]=0
+    optionMenu.place(x=x, y=y)
+    return stringVar
+
+
