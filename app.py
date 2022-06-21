@@ -20,6 +20,13 @@ class messageEncrypter:
         makeLabel(titleFrame, "|", 16, 430, 0)
         makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 450, 2)
 
+    def _makeHomeContent(self):
+        try: self.shownOptions.destroy()
+        except: pass
+        
+        self.shownOptions = makeFrame(self.window, 0.9, 0.8, 0.5, 0.5, "green","center")
+        return self.shownOptions
+
 
 
         self.method_labels = ["Caesar Cipher", "Vernam Cipher", "AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
