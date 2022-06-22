@@ -27,3 +27,7 @@ METHOD_DICT = {
     "Caesar Cipher": CaesarCipher,
     "Vernam Cipher": VernamCipher}
     
+
+#text
+WELCOME_TITLE = "Welcome to the Message Encryption Tool"
+WELCOME_INFO = "Select the desired cryptographic technique\n from the options above."
