@@ -45,3 +45,15 @@ def makeButton(frame, text, func, w, x ,y):
     button.place(x=x, y=y)
     return button
     
+
+def placeImage(parent, file, w, h, x, y):
+    canvas = tk.Canvas(parent, bg=COLOUR_SECOND, width=w, height=h)
+    canvas.place(x=x, y=y)
+    canvas["highlightthickness"]=0
+    img = Image.open(file)
+    img = img.resize((w,h), Image.ANTIALIAS)
+    photoimage = ImageTk.PhotoImage(img)
+    canvas.create_image(w//2, h//2, image=photoimage)
+    return canvas, photoimage
+
+
