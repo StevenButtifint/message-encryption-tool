@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 from constants import *
 
 
@@ -23,9 +24,9 @@ def makeFrame(parentFrame, rw, rh, rx, ry, bg,anchor):
     return frame
 
 
-def makeLabel(frame, text, font_size, x, y):
-    label = tk.Label(frame, text=text, bg=COLOUR_PRIME, fg=COLOUR_TEXT, font=(COLOUR_SECOND,font_size))
-    label.place(x=x, y=y)
+def makeLabel(frame, text, font_size, x, y, anchor, bg):
+    label = tk.Label(frame, text=text, bg=bg, fg=COLOUR_TEXT, font=(COLOUR_SECOND,font_size))
+    label.place(x=x, y=y, anchor=anchor)
     return label
 
 
