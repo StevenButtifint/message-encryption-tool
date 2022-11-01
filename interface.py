@@ -30,6 +30,12 @@ def makeLabel(frame, text, font_size, x, y, anchor, bg):
     return label
 
 
+def makeEntry(frame, width, bg, fg, rx, ry):
+    entry = tk.Entry(frame, width=width, bg=bg, fg=fg)
+    entry.place(relx=rx, rely=ry)
+    return entry
+
+
 def makeTextbox(frame, width, height, bg, fg, rx, ry):
     textbox = tk.Text(frame, width=width, height=height, bg=bg, fg=fg)
     textbox.place(relx=rx, rely=ry, anchor="center")
