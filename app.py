@@ -1,6 +1,9 @@
 from constants import *
 from interface import *
-from tkinter import mainloop
+import tkinter as tk
+
+from cryptographic_methods.caesar_cipher import CaesarCipher
+from cryptographic_methods.vernam_cipher import VernamCipher
 
 
 class messageEncrypter:
