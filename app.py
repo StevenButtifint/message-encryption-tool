@@ -14,10 +14,10 @@ class messageEncrypter:
         makeCanvas(self.window, 500, 500, COLOUR_SECOND)
         titleFrame = makeFrame(self.window, 1, 0.06, 0, 0, COLOUR_PRIME, "nw")
         self.operation = makeOptionMenu(titleFrame, OPERATIONS, lambda x=None: self._updateOptions(), 8, 2, 2)
-        makeLabel(titleFrame, "message using", 12, 160, 15, "center", COLOUR_PRIME)
+        makeLabel(titleFrame, "message using", 12, 0.32, 0.5, "center", COLOUR_PRIME)
         self.method = makeOptionMenu(titleFrame, CRYPTO_METHODS, lambda x=None: self._updateOptions(), 25, 230, 2)
-        makeLabel(titleFrame, "|", 16, 440, 15, "center", COLOUR_PRIME)
-        makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 450, 2)
+        makeLabel(titleFrame, "|", 16, 0.87, 0.5, "center", COLOUR_PRIME)
+        makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 0.94, 0.5)
         self._makeHomeContent()
 
 
