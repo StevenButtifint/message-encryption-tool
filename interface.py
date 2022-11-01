@@ -24,9 +24,9 @@ def makeFrame(parentFrame, rw, rh, rx, ry, bg,anchor):
     return frame
 
 
-def makeLabel(frame, text, font_size, x, y, anchor, bg):
+def makeLabel(frame, text, font_size, relx, rely, anchor, bg):
     label = tk.Label(frame, text=text, bg=bg, fg=COLOUR_TEXT, font=(COLOUR_SECOND,font_size))
-    label.place(x=x, y=y, anchor=anchor)
+    label.place(relx=relx, rely=rely, anchor=anchor)
     return label
 
 
