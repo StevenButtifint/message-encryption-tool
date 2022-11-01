@@ -53,10 +53,10 @@ def makeOptionMenu(frame, options, func, w, x, y):
     return stringVar
 
 
-def makeButton(frame, text, func, w, x ,y):
-    button = tk.Button(frame, text=text, command= func)
+def makeButton(frame, text, func, w, relx ,rely):
+    button = tk.Button(frame, text=text, command=func)
     button.config(width=w, bg=COLOUR_THIRD)
-    button.place(x=x, y=y)
+    button.place(relx=relx, rely=rely, anchor="center")
     return button
     
 
