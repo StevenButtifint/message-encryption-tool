@@ -70,7 +70,19 @@ class messageEncrypter:
         self.messageOutput.config(state=tk.DISABLED)
             
 
+    def _processCaesar(self):
+        key = self.keyScale.get()
+        message = self.messageEntry.get("1.0",tk.END)
+        caesarCipher = CaesarCipher(key)
         
+        if self.operation.get() == "Encrypt":
+            output = caesarCipher.encrypt(message)
+        else:
+            output = caesarCipher.decrypt(message)
+
+        self._updateReadOnlyBox(self.messageOutput, output)
+        
+
         
         
 
