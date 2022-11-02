@@ -46,6 +46,29 @@ class messageEncrypter:
         print(METHOD_DICT[self.method.get()])
 
         
+    def _makeCaesarOptions(self):
+        self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, "red", "center")
+
+        makeLabel(self.shownOptions, "Key:", 12, 0.15, 0.1, "center", COLOUR_SECOND)
+        self.keyScale = makeScale(self.shownOptions, 1, 25, 0.5, 0.13, 20, 300, COLOUR_THIRD, COLOUR_TEXT)
+        self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4) 
+        makeLabel(self.shownOptions, "Output:", 12, 0.12, 0.64, "center", COLOUR_SECOND)
+        self.messageOutput = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.78)
+
+        if self.operation.get() == OPERATIONS[0]:
+            # Encrypt options
+            makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
+            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._processCaesar(), 12, 0.5, 0.56)
+            self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
+
+        else:
+            # Decrypt options
+            makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
+            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processCaesar(), 12, 0.5, 0.56)
+            self.messageOutput.insert(tk.END, "The message will be shown here...")
+
+        self.messageOutput.config(state=tk.DISABLED)
+            
 
         
         
