@@ -28,12 +28,10 @@ class messageEncrypter:
         try: self.shownOptions.destroy()
         except: pass
         self.shownOptions = makeFrame(self.window, 0.95, 0.95, 0.5, 0.55, COLOUR_SECOND,"center")
-        makeLabel(self.shownOptions, WELCOME_TITLE, 16, 230, 50, "center", COLOUR_SECOND)
-        makeLabel(self.shownOptions, WELCOME_INFO, 11, 230, 330, "center", COLOUR_SECOND)
-        #has to return image items to be kept in mainloop to be shown
-        canvas, photoimage = placeImage(self.shownOptions, "res/icons/icon_large.png", 200, 200, 125, 100)       
-        makeLabel(self.shownOptions, "Steven B. 2022", 8, 230, 450, "center", COLOUR_SECOND)
-        mainloop()
+        makeLabel(self.shownOptions, WELCOME_TITLE, 16, 0.5, 0.1, "center", COLOUR_SECOND)
+        makeLabel(self.shownOptions, WELCOME_INFO, 11, 0.5, 0.7, "center", COLOUR_SECOND)
+        canvas, self.imageBG = placeImage(self.shownOptions, "res/icons/icon_large.png", 200, 200, 125, 100)       
+        makeLabel(self.shownOptions, "Steven B. 2022", 8, 0.5, 0.95, "center", COLOUR_SECOND)
 
 
 
