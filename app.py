@@ -34,8 +34,13 @@ class messageEncrypter:
         makeLabel(self.shownOptions, "Steven B. 2022", 8, 0.5, 0.95, "center", COLOUR_SECOND)
 
 
+    def _updateOptions(self):
+        self.shownOptions.destroy()
 
+        interfaceDict = {CRYPTO_METHODS[0]: self._makeCaesarOptions,
+                         CRYPTO_METHODS[1]: self._makeVernamOptions}
 
+        interfaceDict[self.method.get()]()
         
     def _makeHomePage(self):
         title_frm = self._makeFrame(self.window).place(relwidth=1, relheight=0.06, relx=0, rely=0)
