@@ -83,6 +83,12 @@ class messageEncrypter:
         self._updateReadOnlyBox(self.messageOutput, output)
         
 
+    @staticmethod
+    def _updateReadOnlyBox(textBox, content):
+        textBox.config(state=tk.NORMAL)
+        textBox.delete("1.0", tk.END)
+        textBox.insert(tk.END, content)
+        textBox.config(state=tk.DISABLED)
         
         
 
