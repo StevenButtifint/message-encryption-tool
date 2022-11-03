@@ -106,6 +106,13 @@ class messageEncrypter:
             makeButton(self.shownOptions, "Encrypt", lambda x=None: self._processVernam(), 12, 0.5, 0.56)
             self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
 
+        else:
+            #decrypt options
+            makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
+            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processVernam(), 12, 0.5, 0.56)
+            self.messageOutput.insert(tk.END, "The message will be shown here...")
+
+
         
 
 
