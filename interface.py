@@ -74,5 +74,6 @@ def placeImage(parent, file, w, h, x, y):
 def makeScale(frame, minVal, maxVal, rx, ry, height, width, bg, fg):
     scale = tk.Scale(frame, orient='horizontal', from_=minVal, to=maxVal, width=height, length=width, bg=bg, fg=fg)
     scale.place(relx=rx, rely=ry, anchor="center")
+    scale["highlightthickness"]=0
     return scale
 

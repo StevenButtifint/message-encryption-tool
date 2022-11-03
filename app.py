@@ -47,7 +47,7 @@ class messageEncrypter:
 
         
     def _makeCaesarOptions(self):
-        self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, "red", "center")
+        self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, COLOUR_SECOND, "center")
 
         makeLabel(self.shownOptions, "Key:", 12, 0.15, 0.1, "center", COLOUR_SECOND)
         self.keyScale = makeScale(self.shownOptions, 1, 25, 0.5, 0.13, 20, 300, COLOUR_THIRD, COLOUR_TEXT)
