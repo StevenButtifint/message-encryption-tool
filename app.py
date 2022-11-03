@@ -90,6 +90,22 @@ class messageEncrypter:
         textBox.insert(tk.END, content)
         textBox.config(state=tk.DISABLED)
         
+
+    def _makeVernamOptions(self):
+        self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, COLOUR_SECOND, "center")
+
+        makeLabel(self.shownOptions, "Key:", 12, 0.15, 0.1, "center", COLOUR_SECOND)
+        self.keyEntry = makeTextbox(self.shownOptions, 30, 1, COLOUR_THIRD, COLOUR_TEXT, 0.45,0.1) 
+        self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4) 
+        makeLabel(self.shownOptions, "Output:", 12, 0.12, 0.64, "center", COLOUR_SECOND)
+        self.messageOutput = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.78)
+
+        if self.operation.get() == OPERATIONS[0]:
+            #encrypt options
+            makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
+            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._processVernam(), 12, 0.5, 0.56)
+            self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
+
         
 
 
