@@ -113,8 +113,18 @@ class messageEncrypter:
             self.messageOutput.insert(tk.END, "The message will be shown here...")
 
 
+    def _processVernam(self):
+        key = self.keyEntry.get("1.0",tk.END)
+        message = self.messageEntry.get("1.0",tk.END)[:-1]
+        vernamCipher = VernamCipher(key)
         
+        if self.operation.get() == "Encrypt":
+            output = vernamCipher.encrypt(message)
+        else:
+            output = vernamCipher.decrypt(message)
 
+        self._updateReadOnlyBox(self.messageOutput, output)
+        
 
     def _makeCustomInput(self, input_string, operation_type, crypto_method):
 
