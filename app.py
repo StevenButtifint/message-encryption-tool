@@ -126,62 +126,23 @@ class messageEncrypter:
         self._updateReadOnlyBox(self.messageOutput, output)
         
 
-    def _makeCustomInput(self, input_string, operation_type, crypto_method):
 
-        try:
-            self.custom_input_frame.destroy()
-        except:
-            pass
-        self.custom_input_frame = self._makeFrame(self.window).place(relwidth=1, relheight=0.075, relx=0, rely=0.539)
 
                                 # label, font size, x, y, entry width, x, y
-        enc_content = [["Shift Amount:", 12, 10, 278, 35, 110, 280],
-                       ["Key (word):", 12, 10, 278, 35, 110, 280],
-                       ["Input Key:", 12, 10, 278, 37, 90, 280],
-                       ["Enter Custom Key String:", 12, 10, 278, 21, 190, 280],
-                       ["Input Key:", 12, 10, 278, 37, 90, 280]]
         
                                 # label, font size, x, y, entry width, x, y
-        dec_content = [["Shift Amount:", 12, 10, 278, 35, 110, 280],
-                       ["Key (word):", 12, 10, 278, 35, 110, 280],
-                       ["Reuse previous key:", 12, 10, 278, 26, 160, 280],
-                       ["Enter Custom Key String:", 12, 10, 278, 21, 190, 280],
-                       ["Reuse previous key:", 12, 10, 278, 26, 160, 280]]
 
-        method_idx = self.method_labels.index(crypto_method)
         
-        if operation_type == self.crypto_types[0]:
             #encrypt
-            self._makeLabel(self.custom_input_frame, enc_content[method_idx][0], enc_content[method_idx][1], enc_content[method_idx][2], enc_content[method_idx][3])
-            key_ent = Entry(self.custom_input_frame, width=enc_content[method_idx][4], bg=COLOUR_THIRD, fg=COLOUR_TEXT)
-            key_ent.place(x=enc_content[method_idx][5], y=enc_content[method_idx][6])
             
-        else:
             #decrypt
-            self._makeLabel(self.custom_input_frame, dec_content[method_idx][0], dec_content[method_idx][1], dec_content[method_idx][2], dec_content[method_idx][3])
-            key_ent = Entry(self.custom_input_frame, width=dec_content[method_idx][4], bg=COLOUR_THIRD, fg=COLOUR_TEXT)
-            key_ent.place(x=dec_content[method_idx][5], y=dec_content[method_idx][6])
-
-        process_button = Button(self.custom_input_frame, text="PROCESS", width=14, bg=COLOUR_THIRD, fg=COLOUR_TEXT,
-                              command= lambda: self.processMessage(input_string, key_ent.get(), method_idx, operation_type))
-        process_button.place(x=380, y=280)
 
 
-    def processMessage(self, input_string, key, operation_index, crypto_type):
 
-        output = ""
-        operation_method = self.method_classes[operation_index]
+
+
         
-        print(crypto_type + "ing with " + operation_method.__name__)
-
-        method = operation_method(key)
-        
-        if crypto_type == self.crypto_types[0]:
-            output = method.sanitizeEncrypt(input_string)
-        else:
-            output = method.sanitizeDecrypt(input_string)
                 
-        self.setOutputText(self.output_box, output)
 
 
 
