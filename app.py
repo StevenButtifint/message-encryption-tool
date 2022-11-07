@@ -4,6 +4,7 @@ import tkinter as tk
 
 from cryptographic_methods.caesar_cipher import CaesarCipher
 from cryptographic_methods.vernam_cipher import VernamCipher
+from cryptographic_methods.AES_128 import AES_128
 
 
 class messageEncrypter:
@@ -38,7 +39,8 @@ class messageEncrypter:
         self.shownOptions.destroy()
 
         interfaceDict = {CRYPTO_METHODS[0]: self._makeCaesarOptions,
-                         CRYPTO_METHODS[1]: self._makeVernamOptions}
+                         CRYPTO_METHODS[1]: self._makeVernamOptions,
+                         CRYPTO_METHODS[2]: self._makeAES128}
 
         interfaceDict[self.method.get()]()
         
