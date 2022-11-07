@@ -111,7 +111,7 @@ class messageEncrypter:
             makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
             makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processVernam(), 12, 0.5, 0.56)
             self.messageOutput.insert(tk.END, "The message will be shown here...")
-
+        self.messageOutput.config(state=tk.DISABLED)
 
     def _processVernam(self):
         key = self.keyEntry.get("1.0",tk.END)
