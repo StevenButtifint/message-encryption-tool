@@ -143,6 +143,18 @@ class messageEncrypter:
             self.key.config(state=tk.DISABLED)
             self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
 
+        else:
+            # Decrypt options
+            makeLabel(self.shownOptions, "Key used:", 12, 0.12, 0.06, "center", COLOUR_SECOND)
+            self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.14)
+            makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
+            self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4)
+            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processCaesar(), 12, 0.5, 0.55)
+            self.messageOutput.insert(tk.END, "The message will be shown here...")
+
+        
+        self.messageOutput.config(state=tk.DISABLED)
+        
 
 
                                 # label, font size, x, y, entry width, x, y
