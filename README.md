@@ -40,7 +40,7 @@ Message encryption tool with GUI interface. Written in Python using the Tkinter 
 
 ### What I Learned
 
-- How to write different encryption methods manually in Python.
+- How to implement different encryption methods in Python.
 - How to implement external Python classes.
 - How to use a range of Python cryptography libraries.
 
