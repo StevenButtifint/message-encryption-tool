@@ -166,6 +166,11 @@ class messageEncrypter:
             self._updateReadOnlyBox(self.key, key)
             self._updateReadOnlyBox(self.messageOutput, ciphertext)
 
+        else:
+            key = self.key.get("1.0", tk.END)[:-1]
+            plaintext = new_AES_128.decrypt(message, key)
+            self._updateReadOnlyBox(self.messageOutput, plaintext)
+
         
 
 
