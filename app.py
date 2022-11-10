@@ -156,6 +156,16 @@ class messageEncrypter:
 
         
         self.messageOutput.config(state=tk.DISABLED)
+
+    def _processAES128(self):
+
+        message = self.messageEntry.get("1.0", tk.END)[:-1]
+        new_AES_128 = AES_128()
+        if self.operation.get() == "Encrypt":
+            ciphertext, key = new_AES_128.encrypt(message)
+            self._updateReadOnlyBox(self.key, key)
+            self._updateReadOnlyBox(self.messageOutput, ciphertext)
+
         
 
 
