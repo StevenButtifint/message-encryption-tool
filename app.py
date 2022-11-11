@@ -7,7 +7,7 @@ from cryptographic_methods.vernam_cipher import VernamCipher
 from cryptographic_methods.AES_128 import AES_128
 
 
-class messageEncrypter:
+class MessageEncrypter:
     def __init__(self, parent):
         self.window = parent
         self.window.geometry(RESOLUTION)
@@ -190,5 +190,6 @@ class messageEncrypter:
     
 if __name__ == "__main__":
     root = tk.Tk()
-    messageEncrypter(root)
+    MessageEncrypter(root)
+    root.mainloop()
 
