@@ -24,7 +24,6 @@ class messageEncrypter:
         makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 0.94, 0.5)
         self._makeHomeContent()
 
-
     def _makeHomeContent(self):
         try: self.shownOptions.destroy()
         except: pass
@@ -33,7 +32,6 @@ class messageEncrypter:
         makeLabel(self.shownOptions, WELCOME_INFO, 11, 0.5, 0.7, "center", COLOUR_SECOND)
         canvas, self.imageBG = placeImage(self.shownOptions, "res/icons/icon_large.png", 200, 200, 125, 100)       
         makeLabel(self.shownOptions, "Steven B. 2022", 8, 0.5, 0.95, "center", COLOUR_SECOND)
-
 
     def _updateOptions(self):
         self.shownOptions.destroy()
@@ -45,9 +43,7 @@ class messageEncrypter:
         interfaceDict[self.method.get()]()
         
         print(self.operation.get(), self.method.get())        
-        print(METHOD_DICT[self.method.get()])
 
-        
     def _makeCaesarOptions(self):
         self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, COLOUR_SECOND, "center")
 
@@ -70,7 +66,6 @@ class messageEncrypter:
             self.messageOutput.insert(tk.END, "The message will be shown here...")
 
         self.messageOutput.config(state=tk.DISABLED)
-            
 
     def _processCaesar(self):
         key = self.keyScale.get()
@@ -103,13 +98,13 @@ class messageEncrypter:
         self.messageOutput = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.78)
 
         if self.operation.get() == OPERATIONS[0]:
-            #encrypt options
+            # encrypt options
             makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
             makeButton(self.shownOptions, "Encrypt", lambda x=None: self._processVernam(), 12, 0.5, 0.56)
             self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
 
         else:
-            #decrypt options
+            # decrypt options
             makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
             makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processVernam(), 12, 0.5, 0.56)
             self.messageOutput.insert(tk.END, "The message will be shown here...")
@@ -138,7 +133,7 @@ class messageEncrypter:
             # Encrypt options
             makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.06, "center", COLOUR_SECOND)
             self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.2)
-            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._processCaesar(), 12, 0.5, 0.36)
+            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._processAES128(), 12, 0.5, 0.36)
             makeLabel(self.shownOptions, "Key used:", 12, 0.12, 0.44, "center", COLOUR_SECOND)
             self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.53)
             self.key.insert(tk.END, "The generated key used will be shown here...")
@@ -151,10 +146,9 @@ class messageEncrypter:
             self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.14)
             makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
             self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4)
-            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processCaesar(), 12, 0.5, 0.55)
+            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._processAES128(), 12, 0.5, 0.55)
             self.messageOutput.insert(tk.END, "The message will be shown here...")
 
-        
         self.messageOutput.config(state=tk.DISABLED)
 
     def _processAES128(self):
