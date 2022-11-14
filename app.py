@@ -14,6 +14,11 @@ class MessageEncrypter:
         self.window.title(TITLE)
         self.window.iconbitmap(ICON_DIR)
         self.window.resizable(width=False, height=False)
+
+        self.interface_dict = {CRYPTO_METHODS[0]: self._make_caesar_options,
+                               CRYPTO_METHODS[1]: self._make_vernam_options,
+                               CRYPTO_METHODS[2]: self._make_AES,
+                               CRYPTO_METHODS[3]: self._make_AES_custom}
         
         makeCanvas(self.window, 500, 500, COLOUR_SECOND)
         titleFrame = makeFrame(self.window, 1, 0.06, 0, 0, COLOUR_PRIME, "nw")
@@ -35,13 +40,7 @@ class MessageEncrypter:
 
     def _updateOptions(self):
         self.shownOptions.destroy()
-
-        interfaceDict = {CRYPTO_METHODS[0]: self._makeCaesarOptions,
-                         CRYPTO_METHODS[1]: self._makeVernamOptions,
-                         CRYPTO_METHODS[2]: self._makeAES128}
-
-        interfaceDict[self.method.get()]()
-        
+        self.interface_dict[self.method.get()]()
         print(self.operation.get(), self.method.get())        
 
     def _makeCaesarOptions(self):
