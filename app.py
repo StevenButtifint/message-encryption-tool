@@ -1,6 +1,4 @@
-from constants import *
 from interface import *
-import tkinter as tk
 
 from cryptographic_methods.caesar_cipher import CaesarCipher
 from cryptographic_methods.vernam_cipher import VernamCipher
@@ -166,31 +164,15 @@ class MessageEncrypter:
             plaintext = new_AES_128.decrypt(message, key)
             self._updateReadOnlyBox(self.messageOutput, plaintext)
 
-        
-
-
-                                # label, font size, x, y, entry width, x, y
-        
-                                # label, font size, x, y, entry width, x, y
-
-        
-            #encrypt
-            
-            #decrypt
 
 
 
 
 
-        
-                
 
 
 
-
-    
 if __name__ == "__main__":
     root = tk.Tk()
     MessageEncrypter(root)
     root.mainloop()
-
