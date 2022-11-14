@@ -7,7 +7,7 @@ COLOUR_TEXT = "black"
 
 
 # labels
-CRYPTO_METHODS = ["Caesar Cipher", "Vernam Cipher", "AES-128 Symmetric-Key", "AES-256 Custom-Key", "RSA-512 Asymmetric-Key"]
+CRYPTO_METHODS = ["Caesar Cipher", "Vernam Cipher", "AES", "AES Custom-Key", "RSA"]
 OPERATIONS = ["Encrypt", "Decrypt"]
 
 
