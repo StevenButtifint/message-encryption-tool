@@ -21,17 +21,19 @@ class MessageEncrypter:
                                CRYPTO_METHODS[3]: self._make_AES_custom}
         
         makeCanvas(self.window, 500, 500, COLOUR_SECOND)
-        titleFrame = makeFrame(self.window, 1, 0.06, 0, 0, COLOUR_PRIME, "nw")
-        self.operation = makeOptionMenu(titleFrame, OPERATIONS, lambda x=None: self._updateOptions(), 8, 2, 2)
-        makeLabel(titleFrame, "message using", 12, 0.32, 0.5, "center", COLOUR_PRIME)
-        self.method = makeOptionMenu(titleFrame, CRYPTO_METHODS, lambda x=None: self._updateOptions(), 25, 230, 2)
-        makeLabel(titleFrame, "|", 16, 0.87, 0.5, "center", COLOUR_PRIME)
-        makeButton(titleFrame, "Help", lambda x=None: self._makeHomeContent(), 5, 0.94, 0.5)
-        self._makeHomeContent()
+        title_frame = makeFrame(self.window, 1, 0.06, 0, 0, COLOUR_PRIME, "nw")
+        self.operation = makeOptionMenu(title_frame, OPERATIONS, lambda x=None: self._update_options(), 8, 2, 2)
+        makeLabel(title_frame, "message using", 12, 0.32, 0.5, "center", COLOUR_PRIME)
+        self.method = makeOptionMenu(title_frame, CRYPTO_METHODS, lambda x=None: self._update_options(), 25, 230, 2)
+        makeLabel(title_frame, "|", 16, 0.87, 0.5, "center", COLOUR_PRIME)
+        makeButton(title_frame, "Help", lambda x=None: self._make_home_content(), 5, 0.94, 0.5)
+        self._make_home_content()
 
-    def _makeHomeContent(self):
-        try: self.shownOptions.destroy()
-        except: pass
+    def _make_home_content(self):
+        try:
+            self.shownOptions.destroy()
+        except:
+            pass
         self.shownOptions = makeFrame(self.window, 0.95, 0.95, 0.5, 0.55, COLOUR_SECOND,"center")
         makeLabel(self.shownOptions, WELCOME_TITLE, 16, 0.5, 0.1, "center", COLOUR_SECOND)
         makeLabel(self.shownOptions, WELCOME_INFO, 11, 0.5, 0.7, "center", COLOUR_SECOND)
