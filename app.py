@@ -68,16 +68,15 @@ class MessageEncrypter:
 
     def _process_caesar(self):
         key = self.keyScale.get()
-        message = self.messageEntry.get("1.0",tk.END)
-        caesarCipher = CaesarCipher(key)
+        message = self.messageEntry.get("1.0", tk.END)
+        caesar_cipher = CaesarCipher(key)
         
         if self.operation.get() == "Encrypt":
-            output = caesarCipher.encrypt(message)
+            output = caesar_cipher.encrypt(message)
         else:
-            output = caesarCipher.decrypt(message)
+            output = caesar_cipher.decrypt(message)
 
-        self._updateReadOnlyBox(self.messageOutput, output)
-        
+        self._update_readonly_box(self.messageOutput, output)
 
     @staticmethod
     def _update_readonly_box(text_box, content):
@@ -111,15 +110,14 @@ class MessageEncrypter:
     def _process_vernam(self):
         key = self.keyEntry.get("1.0",tk.END)
         message = self.messageEntry.get("1.0",tk.END)[:-1]
-        vernamCipher = VernamCipher(key)
+        vernam_cipher = VernamCipher(key)
         
         if self.operation.get() == "Encrypt":
-            output = vernamCipher.encrypt(message)
+            output = vernam_cipher.encrypt(message)
         else:
-            output = vernamCipher.decrypt(message)
+            output = vernam_cipher.decrypt(message)
 
-        self._updateReadOnlyBox(self.messageOutput, output)
-        
+        self._update_readonly_box(self.messageOutput, output)
 
     def _make_AES(self):
         self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, COLOUR_SECOND, "center")
@@ -151,16 +149,16 @@ class MessageEncrypter:
 
     def _process_AES(self):
         message = self.messageEntry.get("1.0", tk.END)[:-1]
-        new_AES_128 = AES_128()
+        new_AES = AES_128()
         if self.operation.get() == "Encrypt":
-            ciphertext, key = new_AES_128.encrypt(message)
-            self._updateReadOnlyBox(self.key, key)
-            self._updateReadOnlyBox(self.messageOutput, ciphertext)
+            ciphertext, key = new_AES.encrypt(message)
+            self._update_readonly_box(self.key, key)
+            self._update_readonly_box(self.messageOutput, ciphertext)
 
         else:
             key = self.key.get("1.0", tk.END)[:-1]
-            plaintext = new_AES_128.decrypt(message, key)
-            self._updateReadOnlyBox(self.messageOutput, plaintext)
+            plaintext = new_AES.decrypt(message, key)
+            self._update_readonly_box(self.messageOutput, plaintext)
 
 
 
