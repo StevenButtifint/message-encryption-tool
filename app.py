@@ -160,8 +160,20 @@ class MessageEncrypter:
             plaintext = new_AES.decrypt(message, key)
             self._update_readonly_box(self.messageOutput, plaintext)
 
+    def _make_AES_custom(self):
+        self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, COLOUR_SECOND, "center")
 
+        makeLabel(self.shownOptions, "Output:", 12, 0.12, 0.64, "center", COLOUR_SECOND)
+        self.messageOutput = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.78)
 
+        if self.operation.get() == OPERATIONS[0]:
+            # Encrypt options
+            makeLabel(self.shownOptions, "Custom Key:", 12, 0.12, 0.06, "center", COLOUR_SECOND)
+            self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.14)
+            makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
+            self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4)
+            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._process_AES(), 12, 0.5, 0.55)
+            self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
 
 
 
