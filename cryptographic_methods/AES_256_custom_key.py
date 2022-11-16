@@ -22,3 +22,11 @@ class AES_256_custom_key(object):
         cipher = AES.new(key, AES.MODE_CBC, iv)
         return self._unpad(cipher.decrypt(ciphertext[AES.block_size:])).decode('utf-8')
 
+    @staticmethod
+    def _encode_base_64(data):
+        return base64.b64encode(data)
+
+    @staticmethod
+    def _decode_base_64(data):
+        return base64.b64decode(data)
+
