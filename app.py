@@ -186,6 +186,14 @@ class MessageEncrypter:
 
         self.messageOutput.config(state=tk.DISABLED)
 
+    def _process_AES_custom(self):
+        message = self.messageEntry.get("1.0", tk.END)[:-1]
+        key = self.key.get("1.0", tk.END)[:-1]
+        new_AES_custom = AES_256_custom_key()
+        if self.operation.get() == "Encrypt":
+            # add different encryption key lengths
+            ciphertext = new_AES_custom.encrypt(message, key)
+            self._update_readonly_box(self.messageOutput, ciphertext)
 
 
 
