@@ -3,6 +3,7 @@ from interface import *
 from cryptographic_methods.caesar_cipher import CaesarCipher
 from cryptographic_methods.vernam_cipher import VernamCipher
 from cryptographic_methods.AES_128 import AES_128
+from cryptographic_methods.AES_256_custom_key import AES_256_custom_key
 
 
 class MessageEncrypter:
@@ -172,7 +173,7 @@ class MessageEncrypter:
             self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.14)
             makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
             self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4)
-            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._process_AES(), 12, 0.5, 0.55)
+            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._process_AES_custom(), 12, 0.5, 0.55)
             self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
 
         else:
@@ -181,7 +182,7 @@ class MessageEncrypter:
             self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.14)
             makeLabel(self.shownOptions, "Ciphertext:", 12, 0.11, 0.26, "center", COLOUR_SECOND)
             self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.4)
-            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._process_AES(), 12, 0.5, 0.55)
+            makeButton(self.shownOptions, "Decrypt", lambda x=None: self._process_AES_custom(), 12, 0.5, 0.55)
             self.messageOutput.insert(tk.END, "The message will be shown here...")
 
         self.messageOutput.config(state=tk.DISABLED)
