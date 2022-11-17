@@ -33,3 +33,6 @@ class AES_256_custom_key(object):
     def _pad(self, p):
         return p + (self.block_size - len(p) % self.block_size) * chr(self.block_size - len(p) % self.block_size)
 
+    @staticmethod
+    def _unpad(p):
+        return p[:-ord(p[len(p)-1:])]
