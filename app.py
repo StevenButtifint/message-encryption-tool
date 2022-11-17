@@ -195,6 +195,9 @@ class MessageEncrypter:
             ciphertext = new_AES_custom.encrypt(message, key)
             self._update_readonly_box(self.messageOutput, ciphertext)
 
+        else:
+            plaintext = new_AES_custom.decrypt(message, key)
+            self._update_readonly_box(self.messageOutput, plaintext)
 
 
 if __name__ == "__main__":
