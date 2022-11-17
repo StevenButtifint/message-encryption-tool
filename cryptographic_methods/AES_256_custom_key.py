@@ -30,3 +30,6 @@ class AES_256_custom_key(object):
     def _decode_base_64(data):
         return base64.b64decode(data)
 
+    def _pad(self, p):
+        return p + (self.block_size - len(p) % self.block_size) * chr(self.block_size - len(p) % self.block_size)
+
