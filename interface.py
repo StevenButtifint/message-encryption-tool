@@ -12,7 +12,7 @@ def makeCanvas(frame, h, w, bg):
 
 def setOutputText(text_box, content):
     text_box.configure(state=tk.NORMAL)
-    text_box.delete('1.0', tk.END)
+    text_box.delete("1.0", tk.END)
     text_box.insert("1.0", content)
     text_box.configure(state=tk.DISABLED)
   
@@ -46,7 +46,7 @@ def makeOptionMenu(frame, options, func, w, x, y):
     stringVar.set(options[0])
     optionMenu = tk.OptionMenu(frame, stringVar, *options, command=func)
     optionMenu.config(width=w, bg=COLOUR_THIRD, fg=COLOUR_TEXT)
-    optionMenu["highlightthickness"]=0
+    optionMenu.config(highlightthickness=0)
     optionMenu["menu"].config(bg=COLOUR_THIRD, borderwidth=0)
     optionMenu.place(x=x, y=y)
     return stringVar
@@ -72,7 +72,7 @@ def placeImage(parent, file, w, h, x, y):
 
 def makeScale(frame, min_val, max_val, rx, ry, height, width, bg, fg):
     scale = tk.Scale(frame, orient='horizontal', from_=min_val, to=max_val, width=height, length=width, bg=bg, fg=fg)
+    scale.config(highlightthickness=0)
     scale.place(relx=rx, rely=ry, anchor="center")
-    scale["highlightthickness"]=0
     return scale
 
