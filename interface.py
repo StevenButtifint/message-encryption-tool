@@ -3,7 +3,6 @@ from PIL import Image, ImageTk
 from constants import *
 
 
-
 def makeCanvas(frame, h, w, bg):
     canvas = tk.Canvas(frame, height=h, width=w, bg=bg)
     canvas.config(highlightthickness=0)
@@ -18,8 +17,8 @@ def setOutputText(text_box, content):
     text_box.configure(state=tk.DISABLED)
   
 
-def makeFrame(parentFrame, rw, rh, rx, ry, bg,anchor):
-    frame = tk.Frame(parentFrame, bg=bg)
+def makeFrame(parent_frame, rw, rh, rx, ry, bg,anchor):
+    frame = tk.Frame(parent_frame, bg=bg)
     frame.place(relwidth=rw, relheight=rh, relx=rx, rely=ry, anchor=anchor)
     return frame
 
@@ -53,7 +52,7 @@ def makeOptionMenu(frame, options, func, w, x, y):
     return stringVar
 
 
-def makeButton(frame, text, func, w, relx ,rely):
+def makeButton(frame, text, func, w, relx, rely):
     button = tk.Button(frame, text=text, command=func)
     button.config(width=w, bg=COLOUR_THIRD)
     button.place(relx=relx, rely=rely, anchor="center")
@@ -71,8 +70,8 @@ def placeImage(parent, file, w, h, x, y):
     return canvas, photoimage
 
 
-def makeScale(frame, minVal, maxVal, rx, ry, height, width, bg, fg):
-    scale = tk.Scale(frame, orient='horizontal', from_=minVal, to=maxVal, width=height, length=width, bg=bg, fg=fg)
+def makeScale(frame, min_val, max_val, rx, ry, height, width, bg, fg):
+    scale = tk.Scale(frame, orient='horizontal', from_=min_val, to=max_val, width=height, length=width, bg=bg, fg=fg)
     scale.place(relx=rx, rely=ry, anchor="center")
     scale["highlightthickness"]=0
     return scale
