@@ -17,7 +17,7 @@
 
 ### Description
 
-Message encryption tool with GUI interface. Written in Python using the Tkinter GUI toolkit. Encrypt and decrypt messages using Symmetric and Asymmetric encryption. Currently supporting AES and RSA methods.
+Message encryption tool with GUI interface. Written in Python using the Tkinter GUI toolkit. Encrypt and decrypt messages using Symmetric and Asymmetric encryption. Currently supporting Caesar cipher, Vernam cipher, AES and RSA methods.
 
 ---
 
