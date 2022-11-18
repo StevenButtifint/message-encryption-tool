@@ -7,7 +7,6 @@ class VernamCipher(object):
         self.alphabet = "abcdefghijklmnopqrstuvwxyz"
         self.alphabet_len = len(self.alphabet)
 
-
     def encrypt(self, plaintext):
         ciphertext = ""
         plaintext = ''.join(filter(str.isalpha, plaintext))
@@ -17,7 +16,6 @@ class VernamCipher(object):
             ciphertext += (self.alphabet[(p_idx + k_idx) % self.alphabet_len])
         return ciphertext
 
-
     def decrypt(self, ciphertext):
         plaintext = ""
         for idx, letter in enumerate(ciphertext):
@@ -26,12 +24,3 @@ class VernamCipher(object):
             plaintext += (self.alphabet[(p_idx - k_idx) % self.alphabet_len])
         return plaintext
 
-    
-    def sanitizeEncrypt(self, plaintext):
-        ciphertext = self.encrypt(plaintext)
-        return ("Key:\n" + str(self.key) +"\n\n" + "Ciphertext:\n" + str(ciphertext))
-
-
-    def sanitizeDecrypt(self, ciphertext):
-        plaintext = self.decrypt(ciphertext)
-        return ("Key:\n" + str(self.key) +"\n\n" + "Plaintext:\n" + str(plaintext))
