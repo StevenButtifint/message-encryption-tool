@@ -16,3 +16,10 @@ class RSA:
         encoded_ciphertext = base64.b64encode(ciphertext)
         return encoded_ciphertext, private_key.exportKey("PEM"), public_key.exportKey("PEM")
 
+    @staticmethod
+    def decrypt(encoded_ciphertext, key_string):
+        private_key = _RSA.importKey(key_string)
+        encryption = PKCS1_OAEP.new(private_key)
+        ciphertext = base64.b64decode(encoded_ciphertext)
+        plaintext = encryption.decrypt(ciphertext)
+        return plaintext
