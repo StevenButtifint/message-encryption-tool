@@ -4,6 +4,7 @@ from cryptographic_methods.caesar_cipher import CaesarCipher
 from cryptographic_methods.vernam_cipher import VernamCipher
 from cryptographic_methods.AES_128 import AES_128
 from cryptographic_methods.AES_256_custom_key import AES_256_custom_key
+from cryptographic_methods.RSA import RSA
 
 
 class MessageEncrypter:
