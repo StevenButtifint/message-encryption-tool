@@ -202,6 +202,15 @@ class MessageEncrypter:
             self._update_readonly_box(self.messageOutput, plaintext)
 
 
+    def _process_RSA(self):
+        message = self.messageEntry.get("1.0", tk.END)[:-1]
+        new_RSA = RSA(1024)
+        if self.operation.get() == "Encrypt":
+            ciphertext, key, _ = new_RSA.encrypt(message)
+            self._update_readonly_box(self.key, key)
+            self._update_readonly_box(self.messageOutput, ciphertext)
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     MessageEncrypter(root)
