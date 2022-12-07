@@ -18,7 +18,8 @@ class MessageEncrypter:
         self.interface_dict = {CRYPTO_METHODS[0]: self._make_caesar_options,
                                CRYPTO_METHODS[1]: self._make_vernam_options,
                                CRYPTO_METHODS[2]: self._make_AES,
-                               CRYPTO_METHODS[3]: self._make_AES_custom}
+                               CRYPTO_METHODS[3]: self._make_AES_custom,
+                               CRYPTO_METHODS[4]: self._make_RSA}
         
         makeCanvas(self.window, 500, 500, COLOUR_SECOND)
         title_frame = makeFrame(self.window, 1, 0.06, 0, 0, COLOUR_PRIME, "nw")
