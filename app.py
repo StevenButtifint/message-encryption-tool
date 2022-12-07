@@ -207,6 +207,16 @@ class MessageEncrypter:
         makeLabel(self.shownOptions, "Output:", 12, 0.12, 0.64, "center", COLOUR_SECOND)
         self.messageOutput = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.78)
 
+        if self.operation.get() == OPERATIONS[0]:
+            # Encrypt options
+            makeLabel(self.shownOptions, "Message:", 12, 0.11, 0.06, "center", COLOUR_SECOND)
+            self.messageEntry = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.2)
+            makeButton(self.shownOptions, "Encrypt", lambda x=None: self._process_RSA(), 12, 0.5, 0.36)
+            makeLabel(self.shownOptions, "Key used:", 12, 0.12, 0.44, "center", COLOUR_SECOND)
+            self.key = makeTextbox(self.shownOptions, 60, 3, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.53)
+            self.key.insert(tk.END, "The generated key used will be shown here...")
+            self.key.config(state=tk.DISABLED)
+            self.messageOutput.insert(tk.END, "Your ciphertext will be shown here...")
 
     def _process_RSA(self):
         message = self.messageEntry.get("1.0", tk.END)[:-1]
