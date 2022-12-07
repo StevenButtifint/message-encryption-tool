@@ -201,6 +201,12 @@ class MessageEncrypter:
             plaintext = new_AES_custom.decrypt(message, key)
             self._update_readonly_box(self.messageOutput, plaintext)
 
+    def _make_RSA(self):
+        self.shownOptions = makeFrame(self.window, 1, 0.95, 0.5, 0.55, COLOUR_SECOND, "center")
+
+        makeLabel(self.shownOptions, "Output:", 12, 0.12, 0.64, "center", COLOUR_SECOND)
+        self.messageOutput = makeTextbox(self.shownOptions, 60, 6, COLOUR_THIRD, COLOUR_TEXT, 0.5,0.78)
+
 
     def _process_RSA(self):
         message = self.messageEntry.get("1.0", tk.END)[:-1]
